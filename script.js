@@ -214,19 +214,6 @@ ${fields.message.value.trim()}`;
         return;
       }
 
-      const endpointConfigured = !form.action.includes('YOUR_FORM_ID');
-
-      if (!endpointConfigured) {
-        // Form endpoint isn't set up yet — fall back to opening the email
-        // app so nothing is lost. See README.txt to enable automatic,
-        // one-click sending straight to the inbox.
-        mailtoFallback();
-        statusBox.textContent = 'Opening your email app to send this to ' + CONTACT_EMAIL + '.';
-        statusBox.className = 'form-status show ok';
-        form.reset();
-        return;
-      }
-
       setSubmitting(true);
       statusBox.className = 'form-status';
 

@@ -49,28 +49,36 @@ KEY EDIT POINTS
   visitor has "reduce motion" turned on, so nothing needs to be touched for
   mobile — it just quietly turns itself off there.
 
-CONTACT FORM — SEND STRAIGHT TO YOUR INBOX (NO EMAIL APP NEEDED)
+CONTACT FORM — SENDS STRAIGHT TO YOUR INBOX (NO SIGNUP NEEDED)
 -------------------------------------------------------------------
-Out of the box, the form falls back to opening the visitor's own email app
-(a mailto link) because a plain static site has nowhere to send data to.
-To make it submit automatically and land straight in
-taladigitalmedia@gmail.com with zero clicks for the client, connect a free
-form backend — takes about 2 minutes:
+The form is already wired up to deliver straight to
+taladigitalmedia@gmail.com using a free service called FormSubmit — no
+account, no API key, nothing to register. There's exactly ONE thing you
+need to do, and only once, ever:
 
-  1. Go to https://formspree.io and sign up free with
-     taladigitalmedia@gmail.com.
-  2. Create a new form. Formspree will show you an endpoint that looks like
-     https://formspree.io/f/abcwxyz1
-  3. Open index.html, find this line near the "Send inquiry" form:
-       <form id="inquiryForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
-     Replace YOUR_FORM_ID with the ID Formspree gave you.
-  4. Save, redeploy, and test the form once — Formspree sends a one-time
-     confirmation email to verify the address; after that, every submission
-     emails you directly and the client sees "your message is on its way"
-     right on the page, with no extra step on their end.
+  1. Deploy the site (or open index.html locally) and submit the contact
+     form yourself one time, with any test details.
+  2. FormSubmit will send an email to taladigitalmedia@gmail.com titled
+     something like "Please Activate FormSubmit.co". Open it and click the
+     activation link inside.
+  3. That's it — activation is permanent. From that point on, every real
+     submission from a client arrives directly in the inbox automatically,
+     and they see "your message is on its way" right on the page with
+     nothing extra to click on their end.
 
-Until you do this, the form still works — it just opens the client's email
-app instead of sending silently, so you never lose an inquiry either way.
+Until that one-time activation happens, FormSubmit will silently hold the
+very first submission back (that's the "please activate" step) — so do the
+test submission yourself before sharing the site with clients, not the
+other way around.
+
+If you ever want a nicer submissions dashboard (spam filtering, file
+uploads, etc.) instead of plain emails, formsubmit.co also offers a free
+account with the same email — see https://formsubmit.co for details, but
+it's optional; the current setup already delivers to your inbox on its own.
+
+Fallback: if a client's browser blocks the request (ad blocker, offline,
+etc.), the form automatically falls back to opening their own email app
+addressed to taladigitalmedia@gmail.com, so no inquiry is ever lost.
 
 MOBILE
 ------
