@@ -10,6 +10,7 @@ README.txt       This file
 assets/
   tala-logo.png       Official logo (nav + hero watermark)
   mon-sarmiento.webp  Founder photo
+  whatsapp-icon.png   WhatsApp brand icon (floating button + contact list)
   posters/            Thumbnail frame for each showreel video
   videos/             Compressed, web-ready MP4s shown in the "Work" section
 
@@ -48,6 +49,23 @@ KEY EDIT POINTS
   script.js. They're automatically disabled on touch devices and when the
   visitor has "reduce motion" turned on, so nothing needs to be touched for
   mobile — it just quietly turns itself off there.
+- WhatsApp: a floating button (bottom-right, every page/section) and a
+  matching entry in the contact list both open a WhatsApp chat pre-filled
+  with an intro message, currently pointed at +974 3304 3148. To change the
+  number, update the two "https://wa.me/974..." links in index.html (search
+  for "wa.me") — no country-code plus sign or spaces in the digits.
+- Language switcher: an EN / AR pill in the header (visible on every page,
+  desktop and mobile) swaps all visible copy between English and Arabic,
+  flips the page to right-to-left, and switches to the Cairo typeface for
+  Arabic text. The chosen language is remembered per visitor (localStorage)
+  so it stays set on their next visit. All translated text lives in one
+  place in script.js — the `translations` object near the top — with an
+  `en` and an `ar` block sharing the same keys. To edit copy in either
+  language, change the matching key in that object; the HTML pulls its text
+  from there automatically via `data-i18n` attributes, so you don't need to
+  touch index.html to update wording. To add a third language later, add a
+  new block (e.g. `fr: { ... }`) with the same keys and a matching button
+  in the header's `.lang-switch`.
 
 CONTACT FORM — SENDS STRAIGHT TO YOUR INBOX (NO SIGNUP NEEDED)
 -------------------------------------------------------------------

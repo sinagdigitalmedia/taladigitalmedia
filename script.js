@@ -7,6 +7,234 @@ document.addEventListener('DOMContentLoaded', () => {
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- language switcher (English / Arabic) ---------- */
+  const translations = {
+    en: {
+      'brand.full': 'TALA Digital Media<br>Advertising &amp; Events',
+      'nav.mission': 'Mission',
+      'nav.about': 'About',
+      'nav.work': 'Work',
+      'nav.contact': 'Contact',
+      'nav.location': 'Location',
+      'nav.email': 'Email us',
+      'hero.eyebrow': 'Doha, Qatar — Est. Creative Media House',
+      'hero.title': 'Stories, <em>framed</em><br>with purpose.',
+      'hero.sub': 'TALA Digital Media Advertising &amp; Events is a creative media and production company based in Doha. We handle digital content, events coverage, and full media production — every project shaped around your vision, start to final cut.',
+      'hero.ctaPrimary': 'Start a project',
+      'hero.ctaSecondary': 'See our work',
+      'hero.scroll': 'Scroll',
+      'film.01': 'Digital Content',
+      'film.02': 'Events Coverage',
+      'film.03': 'Media Production',
+      'film.04': 'Brand Storytelling',
+      'film.05': 'Creative Direction',
+      'mv.eyebrow': 'Why we exist',
+      'mv.lead1': "Two ideas drive everything TALA builds — ",
+      'mv.lead2': "where we're going",
+      'mv.lead3': ', and ',
+      'mv.lead4': 'why it matters',
+      'mv.lead5': '.',
+      'mv.missionLabel': '— Mission',
+      'mv.missionHead': 'Every story, told with <span class="accent">craft.</span>',
+      'mv.missionBody': 'Our mission is to deliver innovative and high-quality digital media solutions in Qatar that empower brands, organizations, and communities to tell their stories with creativity, purpose, and excellence.',
+      'mv.visionLabel': '— Vision',
+      'mv.visionHead': 'A standard for <span class="accent">impact.</span>',
+      'mv.visionBody': 'Our vision is to become a leading creative digital media hub in Qatar and beyond — recognized for excellence in production, innovation, and artistic collaboration, connecting people, elevating brands, and inspiring communities.',
+      'about.storyMark': 'Our story.',
+      'about.title': 'Built in Doha, made for every screen.',
+      'about.founderRole': 'Founder, TALA Digital Media Advertising &amp; Events',
+      'about.p1': "TALA Digital Media Advertising &amp; Events is a Doha, Qatar–based creative media company founded by Mon Sarmiento. We specialize in providing professional digital media solutions, from strategic planning and creative design to full project execution, tailored to meet each client's unique requirements.",
+      'about.p2': 'Driven by innovation, technical expertise, and a commitment to excellence, our team delivers high-quality and impactful content that strengthens brand identity and elevates events and organizations. We aim to build lasting partnerships by offering reliable, efficient, and results-oriented media services.',
+      'about.pillar1Title': 'Planning',
+      'about.pillar1Body': 'Strategy and creative direction shaped around your goals before a single frame is shot.',
+      'about.pillar2Title': 'Production',
+      'about.pillar2Body': 'Full-scale execution — content, coverage, and media crafted with technical precision.',
+      'about.pillar3Title': 'Partnership',
+      'about.pillar3Body': 'Reliable, results-oriented collaboration built to outlast a single project.',
+      'work.eyebrow': 'Selected work',
+      'work.title': 'A few frames from the field.',
+      'work.sub': 'Recent coverage and production work — tap any reel to play.',
+      'work.card1Title': 'Acrylic Workshop',
+      'work.card1Body': 'Hands-on creative session, captured and cut for social.',
+      'work.card2Title': 'Articulation Workshop',
+      'work.card2Body': 'Workshop coverage focused on process and participant energy.',
+      'work.card3Title': 'Building a Band Workshop',
+      'work.card3Body': 'Multi-camera coverage of a live collaborative session.',
+      'work.card4Title': 'Sinag Fashion Camp — Year 2',
+      'work.card4Body': 'Full event recap: styling, runway, and behind-the-scenes.',
+      'contact.title': "Let's make something worth remembering.",
+      'contact.sub': "Tell us what you're planning and the team behind every TALA frame will follow up shortly.",
+      'contact.emailLabel': 'Email us',
+      'contact.followLabel': 'Follow along',
+      'contact.facebook': 'Facebook',
+      'contact.instagram': 'Instagram',
+      'contact.whatsapp': 'WhatsApp',
+      'contact.visitLabel': 'Visit us',
+      'contact.address': 'Building No 30, Office Building, 5th Floor<br>Street No 138, Zone 6, Doha, Qatar',
+      'form.name': 'Your name',
+      'form.namePh': 'Full name',
+      'form.nameErr': 'Please tell us your name.',
+      'form.email': 'Email',
+      'form.emailPh': 'you@company.com',
+      'form.emailErr': 'Enter a valid email address.',
+      'form.phone': 'Phone',
+      'form.optional': '(optional)',
+      'form.service': 'What do you need?',
+      'form.serviceSelect': 'Select a service',
+      'form.opt1': 'Digital Content',
+      'form.opt2': 'Events Coverage',
+      'form.opt3': 'Media Production',
+      'form.opt4': 'Brand Storytelling',
+      'form.opt5': 'Creative Direction',
+      'form.opt6': 'Something else',
+      'form.serviceErr': 'Select what you need.',
+      'form.message': 'Tell us about the project',
+      'form.messagePh': "Timeline, budget range, what you're trying to achieve...",
+      'form.messageErr': 'Give us a few details (10+ characters).',
+      'form.submit': 'Send inquiry',
+      'form.note': 'Sends straight to our inbox — no email app needed on your end.',
+      'map.title': 'TALA Digital Media Advertising &amp; Events',
+      'map.caption': 'Building No 30, Office Building, 5th Floor, Street No 138, Zone 6 — Doha, Qatar.',
+      'map.open': 'Open in Google Maps ↗',
+      'map.badge': 'TALA Digital Media Advertising &amp; Events',
+      'footer.brand': 'TALA Digital Media Advertising &amp; Events',
+      'footer.tagline': 'Doha, Qatar — Creative Media &amp; Production',
+    },
+    ar: {
+      'brand.full': 'تالا لإدارة الإعلام الرقمي<br>والدعاية والفعاليات',
+      'nav.mission': 'رسالتنا',
+      'nav.about': 'من نحن',
+      'nav.work': 'أعمالنا',
+      'nav.contact': 'تواصل معنا',
+      'nav.location': 'الموقع',
+      'nav.email': 'راسلنا',
+      'hero.eyebrow': 'الدوحة، قطر — بيت إبداعي للإعلام الرقمي',
+      'hero.title': 'قصص، <em>موثّقة</em><br>بغاية.',
+      'hero.sub': 'تالا للإعلام الرقمي والدعاية والفعاليات شركة إعلام إبداعي وإنتاج مقرها الدوحة. نتولى المحتوى الرقمي، وتغطية الفعاليات، والإنتاج الإعلامي الكامل — كل مشروع يُصمَّم وفق رؤيتكم من البداية حتى اللقطة الأخيرة.',
+      'hero.ctaPrimary': 'ابدأ مشروعك',
+      'hero.ctaSecondary': 'شاهد أعمالنا',
+      'hero.scroll': 'مرر للأسفل',
+      'film.01': 'محتوى رقمي',
+      'film.02': 'تغطية الفعاليات',
+      'film.03': 'إنتاج إعلامي',
+      'film.04': 'سرد العلامة التجارية',
+      'film.05': 'إخراج إبداعي',
+      'mv.eyebrow': 'لماذا نحن هنا',
+      'mv.lead1': 'فكرتان تقودان كل ما تبنيه تالا — ',
+      'mv.lead2': 'إلى أين نتجه',
+      'mv.lead3': '، ولماذا',
+      'mv.lead4': ' يهم الأمر',
+      'mv.lead5': '.',
+      'mv.missionLabel': '— رسالتنا',
+      'mv.missionHead': 'كل قصة تُروى بـ<span class="accent">حرفية.</span>',
+      'mv.missionBody': 'رسالتنا هي تقديم حلول إعلامية رقمية مبتكرة وعالية الجودة في قطر، تمكّن العلامات التجارية والمؤسسات والمجتمعات من سرد قصصها بإبداع وهدف وتميّز.',
+      'mv.visionLabel': '— رؤيتنا',
+      'mv.visionHead': 'معيار لـ<span class="accent">التأثير.</span>',
+      'mv.visionBody': 'رؤيتنا أن نصبح مركزاً إبداعياً رائداً للإعلام الرقمي في قطر وخارجها — معروفين بالتميّز في الإنتاج والابتكار والتعاون الفني، ونصل الناس ونرتقي بالعلامات التجارية ونلهم المجتمعات.',
+      'about.storyMark': 'قصتنا.',
+      'about.title': 'وُلدنا في الدوحة، وصُممنا لكل شاشة.',
+      'about.founderRole': 'المؤسس، تالا للإعلام الرقمي والدعاية والفعاليات',
+      'about.p1': 'تالا للإعلام الرقمي والدعاية والفعاليات شركة إعلام إبداعي مقرها الدوحة، قطر، أسسها مون سارمينتو. نقدّم حلولاً إعلامية رقمية احترافية، من التخطيط الاستراتيجي والتصميم الإبداعي إلى التنفيذ الكامل للمشاريع، بما يلائم احتياجات كل عميل.',
+      'about.p2': 'مدفوعين بالابتكار والخبرة التقنية والالتزام بالتميّز، يقدّم فريقنا محتوى عالي الجودة ومؤثراً يعزز هوية العلامة التجارية ويرتقي بالفعاليات والمؤسسات. نسعى لبناء شراكات دائمة عبر خدمات إعلامية موثوقة وفعّالة وقائمة على النتائج.',
+      'about.pillar1Title': 'التخطيط',
+      'about.pillar1Body': 'استراتيجية وتوجيه إبداعي يُصمَّمان حول أهدافكم قبل تصوير أي لقطة.',
+      'about.pillar2Title': 'الإنتاج',
+      'about.pillar2Body': 'تنفيذ متكامل — محتوى وتغطية وإعلام بدقة تقنية عالية.',
+      'about.pillar3Title': 'الشراكة',
+      'about.pillar3Body': 'تعاون موثوق وقائم على النتائج يدوم لما بعد المشروع الواحد.',
+      'work.eyebrow': 'أعمال مختارة',
+      'work.title': 'لقطات من الميدان.',
+      'work.sub': 'تغطيات وأعمال إنتاج حديثة — اضغط على أي مقطع لتشغيله.',
+      'work.card1Title': 'ورشة الأكريليك',
+      'work.card1Body': 'جلسة إبداعية تفاعلية، صُوّرت ومُونتجت لمنصات التواصل.',
+      'work.card2Title': 'ورشة النطق والتعبير',
+      'work.card2Body': 'تغطية ورشة تركّز على سير العمل وطاقة المشاركين.',
+      'work.card3Title': 'ورشة تكوين فرقة موسيقية',
+      'work.card3Body': 'تغطية متعددة الكاميرات لجلسة تعاونية حية.',
+      'work.card4Title': 'معسكر سيناغ للأزياء — السنة الثانية',
+      'work.card4Body': 'ملخص كامل للفعالية: التنسيق، عرض الأزياء، وخلف الكواليس.',
+      'contact.title': 'لنصنع شيئاً يستحق أن يُتذكّر.',
+      'contact.sub': 'أخبرونا بما تخططون له، وسيتواصل معكم فريق تالا قريباً.',
+      'contact.emailLabel': 'راسلنا',
+      'contact.followLabel': 'تابعونا',
+      'contact.facebook': 'فيسبوك',
+      'contact.instagram': 'إنستغرام',
+      'contact.whatsapp': 'واتساب',
+      'contact.visitLabel': 'زوروا مكتبنا',
+      'contact.address': 'مبنى رقم 30، الطابق الخامس<br>شارع رقم 138، المنطقة 6، الدوحة، قطر',
+      'form.name': 'الاسم الكامل',
+      'form.namePh': 'الاسم الكامل',
+      'form.nameErr': 'يرجى كتابة اسمكم.',
+      'form.email': 'البريد الإلكتروني',
+      'form.emailPh': 'you@company.com',
+      'form.emailErr': 'يرجى إدخال بريد إلكتروني صحيح.',
+      'form.phone': 'رقم الهاتف',
+      'form.optional': '(اختياري)',
+      'form.service': 'ما الذي تحتاجونه؟',
+      'form.serviceSelect': 'اختر خدمة',
+      'form.opt1': 'محتوى رقمي',
+      'form.opt2': 'تغطية فعاليات',
+      'form.opt3': 'إنتاج إعلامي',
+      'form.opt4': 'سرد العلامة التجارية',
+      'form.opt5': 'إخراج إبداعي',
+      'form.opt6': 'شيء آخر',
+      'form.serviceErr': 'يرجى اختيار الخدمة المطلوبة.',
+      'form.message': 'أخبرونا عن مشروعكم',
+      'form.messagePh': 'الجدول الزمني، الميزانية التقريبية، وما تسعون لتحقيقه...',
+      'form.messageErr': 'يرجى إضافة بعض التفاصيل (10 أحرف على الأقل).',
+      'form.submit': 'إرسال الطلب',
+      'form.note': 'يصل مباشرة إلى بريدنا — لا حاجة لفتح تطبيق البريد لديكم.',
+      'map.title': 'تالا للإعلام الرقمي والدعاية والفعاليات',
+      'map.caption': 'مبنى رقم 30، الطابق الخامس، شارع رقم 138، المنطقة 6 — الدوحة، قطر.',
+      'map.open': 'افتح في خرائط جوجل ↗',
+      'map.badge': 'تالا للإعلام الرقمي والدعاية والفعاليات',
+      'footer.brand': 'تالا للإعلام الرقمي والدعاية والفعاليات',
+      'footer.tagline': 'الدوحة، قطر — إعلام وإنتاج إبداعي',
+    },
+  };
+
+  function applyLanguage(lang) {
+    const dict = translations[lang] || translations.en;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+    });
+
+    const isAr = lang === 'ar';
+    document.documentElement.setAttribute('lang', isAr ? 'ar' : 'en');
+    document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+    document.body.classList.toggle('lang-ar', isAr);
+
+    const enBtn = document.getElementById('langEn');
+    const arBtn = document.getElementById('langAr');
+    if (enBtn && arBtn) {
+      enBtn.classList.toggle('active', !isAr);
+      arBtn.classList.toggle('active', isAr);
+    }
+
+    try { localStorage.setItem('tala-lang', lang); } catch (e) { /* ignore */ }
+  }
+
+  const langEnBtn = document.getElementById('langEn');
+  const langArBtn = document.getElementById('langAr');
+  if (langEnBtn && langArBtn) {
+    langEnBtn.addEventListener('click', () => applyLanguage('en'));
+    langArBtn.addEventListener('click', () => applyLanguage('ar'));
+  }
+
+  let savedLang = 'en';
+  try { savedLang = localStorage.getItem('tala-lang') || 'en'; } catch (e) { /* ignore */ }
+  applyLanguage(savedLang);
+
   /* ---------- header scroll state ---------- */
   const header = document.getElementById('siteHeader');
   if (header) {

@@ -76,6 +76,7 @@ header.scrolled{
 }
 .logo-mark{height:30px; width:auto; filter:drop-shadow(0 0 8px rgba(201,166,104,0.25));}
 .logo .full{font-weight:300; font-size:.68em; opacity:.72; letter-spacing:.01em;}
+.nav-wrap{display:flex; align-items:center; gap:22px;}
 nav.links{display:flex; align-items:center; gap:clamp(16px,3vw,34px); font-size:.86rem; letter-spacing:.03em;}
 nav.links a:not(.btn){position:relative; padding:4px 0; color:var(--off-white); opacity:.82;}
 nav.links a:not(.btn)::after{
@@ -90,6 +91,18 @@ nav.links a:not(.btn):hover::after{width:100%;}
   will-change: transform;
   transform-style: preserve-3d;
 }
+
+.lang-switch{
+  display:flex; align-items:center; gap:2px; padding:3px; border:1px solid var(--line); border-radius:999px;
+  background:rgba(23,21,19,0.5);
+}
+.lang-btn{
+  border:none; background:transparent; color:rgba(243,237,225,0.55);
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+  padding:6px 12px; border-radius:999px; cursor:pointer; transition:background .3s ease, color .3s ease;
+}
+.lang-btn.active{background:var(--sand); color:var(--charcoal); font-weight:700;}
+.lang-btn:not(.active):hover{color:var(--off-white);}
 
 .nav-toggle{display:none;}
 .nav-toggle span{transition:transform .3s ease, opacity .3s ease;}
@@ -366,6 +379,9 @@ h1.hero-title em{
 .social-inline:hover .icon{background:var(--sand);}
 .social-inline:hover .icon svg{fill:var(--charcoal);}
 .social-inline .icon svg{width:16px;height:16px; fill:var(--sand); transition:fill .3s ease;}
+.social-inline .icon.icon-wa{border-color:#3fbf5f; background:transparent; overflow:hidden;}
+.social-inline .icon.icon-wa img{width:100%; height:100%; object-fit:cover;}
+.social-inline:hover .icon.icon-wa{background:transparent;}
 .social-inline .name{font-size:.95rem; font-weight:500;}
 .social-inline .handle{font-family:var(--mono); font-size:.72rem; color:rgba(243,237,225,0.5);}
 
@@ -529,3 +545,81 @@ footer .fmark{font-family:var(--display); font-weight:600; color:var(--off-white
   .work-video .play-btn{width:64px; height:64px; opacity:1;}
 }
 
+
+/* ---------- FLOATING WHATSAPP BUTTON ---------- */
+.wa-float{
+  position:fixed; right:clamp(16px,3vw,32px); bottom:clamp(16px,3vw,32px); z-index:200;
+  width:62px; height:62px; border-radius:50%;
+  background:linear-gradient(145deg,#3fbf5f,#1f9a45);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 10px 26px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+}
+.wa-float img{width:60%; height:60%; object-fit:contain; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25));}
+.wa-float:hover{
+  transform:translateY(-4px) scale(1.06) perspective(600px) rotateX(6deg);
+  box-shadow:0 16px 34px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+}
+.wa-ring{
+  position:absolute; inset:0; border-radius:50%;
+  border:2px solid #3fbf5f;
+  animation:wa-pulse 2.2s ease-out infinite;
+  pointer-events:none;
+}
+@keyframes wa-pulse{
+  0%{transform:scale(1); opacity:.55;}
+  100%{transform:scale(1.55); opacity:0;}
+}
+@media (prefers-reduced-motion: reduce){
+  .wa-ring{animation:none; display:none;}
+}
+@media(max-width:600px){
+  .wa-float{width:54px; height:54px; right:14px; bottom:14px;}
+}
+
+/* ---------- ARABIC / RTL ---------- */
+body.lang-ar{
+  font-family:'Cairo', var(--body);
+}
+body.lang-ar .hero-title,
+body.lang-ar .mv-head,
+body.lang-ar .about-title,
+body.lang-ar .work-title,
+body.lang-ar .contact-title,
+body.lang-ar .story-mark,
+body.lang-ar .founder-tag strong,
+body.lang-ar .connect-title{
+  font-family:'Cairo', var(--display);
+  font-style:normal;
+}
+body.lang-ar .eyebrow,
+body.lang-ar .mv-num,
+body.lang-ar .filmstrip .frame,
+body.lang-ar .map-badge,
+body.lang-ar .form-note,
+body.lang-ar .handle,
+body.lang-ar .hero-meta{
+  font-family:'Cairo', var(--mono);
+}
+
+body.lang-ar .hero-title em{font-style:normal;}
+body.lang-ar .mv-head .accent{font-style:normal;}
+body.lang-ar .story-mark{font-style:normal;}
+body.lang-ar .mv-lead span{font-style:normal !important;}
+
+html[dir="rtl"] .eyebrow::before{margin-left:.7em; margin-right:0;}
+html[dir="rtl"] .mv-col:first-child{border-right:none; border-left:1px solid var(--line);}
+html[dir="rtl"] .pillar:not(:last-child){border-right:none; border-left:1px solid var(--line); padding-right:0; padding-left:22px;}
+html[dir="rtl"] .about-copy p::first-letter{float:right; padding-left:.08em; padding-right:0;}
+html[dir="rtl"] .scroll-cue{left:auto; right:clamp(20px,5vw,64px);}
+html[dir="rtl"] .hero-meta{right:auto; left:clamp(20px,5vw,64px); text-align:left;}
+html[dir="rtl"] .medallion{right:auto; left:clamp(20px,6vw,90px);}
+html[dir="rtl"] .hero-watermark{right:auto; left:clamp(-60px,-2vw,20px);}
+html[dir="rtl"] .social-inline:hover{transform:translateX(-6px);}
+html[dir="rtl"] .social-row:hover .arrow{transform:translateX(-6px) rotate(180deg);}
+html[dir="rtl"] .wa-float{right:auto; left:clamp(16px,3vw,32px);}
+html[dir="rtl"] .btn.ghost{direction:rtl;}
+html[dir="rtl"] .map-open{direction:ltr; display:inline-block;}
+@media(max-width:600px){
+  html[dir="rtl"] .wa-float{left:14px; right:auto;}
+}

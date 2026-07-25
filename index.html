@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/tala-logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,17 +19,23 @@
 <header id="siteHeader">
   <a href="#top" class="logo">
     <img src="assets/tala-logo.png" alt="TALA Digital Media Advertising & Events" class="logo-mark">
-    <span class="full">TALA Digital Media<br>Advertising &amp; Events</span>
+    <span class="full" data-i18n="brand.full">TALA Digital Media<br>Advertising &amp; Events</span>
   </a>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-  <nav class="links" id="navLinks">
-    <a href="#mission" data-close>Mission</a>
-    <a href="#about" data-close>About</a>
-    <a href="#work" data-close>Work</a>
-    <a href="#contact" data-close>Contact</a>
-    <a href="#location" data-close>Location</a>
-    <a href="mailto:taladigitalmedia@gmail.com" class="btn nav-cta" data-close>Email us</a>
-  </nav>
+  <div class="nav-wrap">
+    <nav class="links" id="navLinks">
+      <a href="#mission" data-close data-i18n="nav.mission">Mission</a>
+      <a href="#about" data-close data-i18n="nav.about">About</a>
+      <a href="#work" data-close data-i18n="nav.work">Work</a>
+      <a href="#contact" data-close data-i18n="nav.contact">Contact</a>
+      <a href="#location" data-close data-i18n="nav.location">Location</a>
+      <a href="mailto:taladigitalmedia@gmail.com" class="btn nav-cta" data-close data-i18n="nav.email">Email us</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="lang-btn active" id="langEn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" id="langAr" data-lang="ar">AR</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
 </header>
 
 <section class="hero" id="top">
@@ -46,12 +52,12 @@
     </div>
   </div>
 
-  <div class="hero-eyebrow eyebrow">Doha, Qatar — Est. Creative Media House</div>
-  <h1 class="hero-title">Stories, <em>framed</em><br>with purpose.</h1>
-  <p class="hero-sub">TALA Digital Media Advertising &amp; Events is a creative media and production company based in Doha. We handle digital content, events coverage, and full media production — every project shaped around your vision, start to final cut.</p>
+  <div class="hero-eyebrow eyebrow" data-i18n="hero.eyebrow">Doha, Qatar — Est. Creative Media House</div>
+  <h1 class="hero-title" data-i18n-html="hero.title">Stories, <em>framed</em><br>with purpose.</h1>
+  <p class="hero-sub" data-i18n="hero.sub">TALA Digital Media Advertising &amp; Events is a creative media and production company based in Doha. We handle digital content, events coverage, and full media production — every project shaped around your vision, start to final cut.</p>
   <div class="hero-cta">
-    <a href="#contact" class="btn">Start a project</a>
-    <a href="#work" class="btn ghost">See our work</a>
+    <a href="#contact" class="btn" data-i18n="hero.ctaPrimary">Start a project</a>
+    <a href="#work" class="btn ghost" data-i18n="hero.ctaSecondary">See our work</a>
   </div>
 
   <div class="hero-meta">
@@ -60,42 +66,42 @@
     REEL NO. 01 — MISSION &amp; VISION
   </div>
 
-  <div class="scroll-cue"><span class="line"></span>Scroll</div>
+  <div class="scroll-cue"><span class="line"></span><span data-i18n="hero.scroll">Scroll</span></div>
 </section>
 
 <div class="filmstrip">
   <div class="track">
-    <div class="frame"><span class="num">01</span> Digital Content</div>
-    <div class="frame"><span class="num">02</span> Events Coverage</div>
-    <div class="frame"><span class="num">03</span> Media Production</div>
-    <div class="frame"><span class="num">04</span> Brand Storytelling</div>
-    <div class="frame"><span class="num">05</span> Creative Direction</div>
-    <div class="frame"><span class="num">01</span> Digital Content</div>
-    <div class="frame"><span class="num">02</span> Events Coverage</div>
-    <div class="frame"><span class="num">03</span> Media Production</div>
-    <div class="frame"><span class="num">04</span> Brand Storytelling</div>
-    <div class="frame"><span class="num">05</span> Creative Direction</div>
+    <div class="frame"><span class="num">01</span> <span data-i18n="film.01">Digital Content</span></div>
+    <div class="frame"><span class="num">02</span> <span data-i18n="film.02">Events Coverage</span></div>
+    <div class="frame"><span class="num">03</span> <span data-i18n="film.03">Media Production</span></div>
+    <div class="frame"><span class="num">04</span> <span data-i18n="film.04">Brand Storytelling</span></div>
+    <div class="frame"><span class="num">05</span> <span data-i18n="film.05">Creative Direction</span></div>
+    <div class="frame"><span class="num">01</span> <span data-i18n="film.01">Digital Content</span></div>
+    <div class="frame"><span class="num">02</span> <span data-i18n="film.02">Events Coverage</span></div>
+    <div class="frame"><span class="num">03</span> <span data-i18n="film.03">Media Production</span></div>
+    <div class="frame"><span class="num">04</span> <span data-i18n="film.04">Brand Storytelling</span></div>
+    <div class="frame"><span class="num">05</span> <span data-i18n="film.05">Creative Direction</span></div>
   </div>
 </div>
 
 <section class="mv" id="mission">
   <div class="reveal">
-    <div class="eyebrow">Why we exist</div>
+    <div class="eyebrow" data-i18n="mv.eyebrow">Why we exist</div>
     <p class="mv-lead" style="font-family:var(--display); font-size:clamp(1.6rem,2.6vw,2.2rem); font-weight:500; margin-top:22px; line-height:1.35;">
-      Two ideas drive everything TALA builds — <span style="color:var(--sand-light); font-style:italic;">where we're going</span>, and <span style="color:var(--maroon-light); font-style:italic;">why it matters</span>.
+      <span data-i18n="mv.lead1">Two ideas drive everything TALA builds — </span><span style="color:var(--sand-light); font-style:italic;" data-i18n="mv.lead2">where we're going</span><span data-i18n="mv.lead3">, and </span><span style="color:var(--maroon-light); font-style:italic;" data-i18n="mv.lead4">why it matters</span><span data-i18n="mv.lead5">.</span>
     </p>
   </div>
 
   <div class="mv-inner">
     <div class="mv-col reveal" data-tilt data-tilt-max="5">
-      <div class="mv-num">— Mission</div>
-      <h3 class="mv-head">Every story, told with <span class="accent">craft.</span></h3>
-      <p>Our mission is to deliver innovative and high-quality digital media solutions in Qatar that empower brands, organizations, and communities to tell their stories with creativity, purpose, and excellence.</p>
+      <div class="mv-num" data-i18n="mv.missionLabel">— Mission</div>
+      <h3 class="mv-head" data-i18n-html="mv.missionHead">Every story, told with <span class="accent">craft.</span></h3>
+      <p data-i18n="mv.missionBody">Our mission is to deliver innovative and high-quality digital media solutions in Qatar that empower brands, organizations, and communities to tell their stories with creativity, purpose, and excellence.</p>
     </div>
     <div class="mv-col reveal" data-tilt data-tilt-max="5">
-      <div class="mv-num">— Vision</div>
-      <h3 class="mv-head">A standard for <span class="accent">impact.</span></h3>
-      <p>Our vision is to become a leading creative digital media hub in Qatar and beyond — recognized for excellence in production, innovation, and artistic collaboration, connecting people, elevating brands, and inspiring communities.</p>
+      <div class="mv-num" data-i18n="mv.visionLabel">— Vision</div>
+      <h3 class="mv-head" data-i18n-html="mv.visionHead">A standard for <span class="accent">impact.</span></h3>
+      <p data-i18n="mv.visionBody">Our vision is to become a leading creative digital media hub in Qatar and beyond — recognized for excellence in production, innovation, and artistic collaboration, connecting people, elevating brands, and inspiring communities.</p>
     </div>
   </div>
 </section>
@@ -103,35 +109,35 @@
 <section class="about" id="about">
   <div class="about-grid">
     <div class="about-sticky reveal">
-      <div class="story-mark">Our story.</div>
-      <h2 class="about-title">Built in Doha, made for every screen.</h2>
+      <div class="story-mark" data-i18n="about.storyMark">Our story.</div>
+      <h2 class="about-title" data-i18n="about.title">Built in Doha, made for every screen.</h2>
       <div class="founder-card">
         <img src="assets/mon-sarmiento.webp" alt="Mon Sarmiento, Founder of TALA Digital Media Advertising & Events" class="founder-photo">
         <div class="founder-tag">
           <strong>Mon Sarmiento</strong>
-          <span class="role">Founder, TALA Digital Media Advertising &amp; Events</span>
+          <span class="role" data-i18n="about.founderRole">Founder, TALA Digital Media Advertising &amp; Events</span>
         </div>
       </div>
     </div>
 
     <div class="reveal">
       <div class="about-copy">
-        <p>TALA Digital Media Advertising &amp; Events is a Doha, Qatar–based creative media company founded by Mon Sarmiento. We specialize in providing professional digital media solutions, from strategic planning and creative design to full project execution, tailored to meet each client's unique requirements.</p>
-        <p>Driven by innovation, technical expertise, and a commitment to excellence, our team delivers high-quality and impactful content that strengthens brand identity and elevates events and organizations. We aim to build lasting partnerships by offering reliable, efficient, and results-oriented media services.</p>
+        <p data-i18n="about.p1">TALA Digital Media Advertising &amp; Events is a Doha, Qatar–based creative media company founded by Mon Sarmiento. We specialize in providing professional digital media solutions, from strategic planning and creative design to full project execution, tailored to meet each client's unique requirements.</p>
+        <p data-i18n="about.p2">Driven by innovation, technical expertise, and a commitment to excellence, our team delivers high-quality and impactful content that strengthens brand identity and elevates events and organizations. We aim to build lasting partnerships by offering reliable, efficient, and results-oriented media services.</p>
       </div>
 
       <div class="pillars">
         <div class="pillar" data-tilt data-tilt-max="6">
-          <h4>Planning</h4>
-          <p>Strategy and creative direction shaped around your goals before a single frame is shot.</p>
+          <h4 data-i18n="about.pillar1Title">Planning</h4>
+          <p data-i18n="about.pillar1Body">Strategy and creative direction shaped around your goals before a single frame is shot.</p>
         </div>
         <div class="pillar" data-tilt data-tilt-max="6">
-          <h4>Production</h4>
-          <p>Full-scale execution — content, coverage, and media crafted with technical precision.</p>
+          <h4 data-i18n="about.pillar2Title">Production</h4>
+          <p data-i18n="about.pillar2Body">Full-scale execution — content, coverage, and media crafted with technical precision.</p>
         </div>
         <div class="pillar" data-tilt data-tilt-max="6">
-          <h4>Partnership</h4>
-          <p>Reliable, results-oriented collaboration built to outlast a single project.</p>
+          <h4 data-i18n="about.pillar3Title">Partnership</h4>
+          <p data-i18n="about.pillar3Body">Reliable, results-oriented collaboration built to outlast a single project.</p>
         </div>
       </div>
     </div>
@@ -140,9 +146,9 @@
 
 <section class="work" id="work">
   <div class="work-head reveal">
-    <div class="eyebrow">Selected work</div>
-    <h2 class="work-title">A few frames from the field.</h2>
-    <p class="work-sub">Recent coverage and production work — tap any reel to play.</p>
+    <div class="eyebrow" data-i18n="work.eyebrow">Selected work</div>
+    <h2 class="work-title" data-i18n="work.title">A few frames from the field.</h2>
+    <p class="work-sub" data-i18n="work.sub">Recent coverage and production work — tap any reel to play.</p>
   </div>
 
   <div class="work-grid reveal">
@@ -154,8 +160,8 @@
         <button class="play-btn" type="button" aria-label="Play video">▶</button>
       </div>
       <div class="work-meta">
-        <h3>Acrylic Workshop</h3>
-        <p>Hands-on creative session, captured and cut for social.</p>
+        <h3 data-i18n="work.card1Title">Acrylic Workshop</h3>
+        <p data-i18n="work.card1Body">Hands-on creative session, captured and cut for social.</p>
       </div>
     </article>
 
@@ -167,8 +173,8 @@
         <button class="play-btn" type="button" aria-label="Play video">▶</button>
       </div>
       <div class="work-meta">
-        <h3>Articulation Workshop</h3>
-        <p>Workshop coverage focused on process and participant energy.</p>
+        <h3 data-i18n="work.card2Title">Articulation Workshop</h3>
+        <p data-i18n="work.card2Body">Workshop coverage focused on process and participant energy.</p>
       </div>
     </article>
 
@@ -180,8 +186,8 @@
         <button class="play-btn" type="button" aria-label="Play video">▶</button>
       </div>
       <div class="work-meta">
-        <h3>Building a Band Workshop</h3>
-        <p>Multi-camera coverage of a live collaborative session.</p>
+        <h3 data-i18n="work.card3Title">Building a Band Workshop</h3>
+        <p data-i18n="work.card3Body">Multi-camera coverage of a live collaborative session.</p>
       </div>
     </article>
 
@@ -193,8 +199,8 @@
         <button class="play-btn" type="button" aria-label="Play video">▶</button>
       </div>
       <div class="work-meta">
-        <h3>Sinag Fashion Camp — Year 2</h3>
-        <p>Full event recap: styling, runway, and behind-the-scenes.</p>
+        <h3 data-i18n="work.card4Title">Sinag Fashion Camp — Year 2</h3>
+        <p data-i18n="work.card4Body">Full event recap: styling, runway, and behind-the-scenes.</p>
       </div>
     </article>
   </div>
@@ -202,41 +208,48 @@
 
 <section class="contact" id="contact">
   <div class="contact-head reveal">
-    <h2 class="contact-title">Let's make something worth remembering.</h2>
-    <p class="contact-sub">Tell us what you're planning and the team behind every TALA frame will follow up shortly.</p>
+    <h2 class="contact-title" data-i18n="contact.title">Let's make something worth remembering.</h2>
+    <p class="contact-sub" data-i18n="contact.sub">Tell us what you're planning and the team behind every TALA frame will follow up shortly.</p>
   </div>
 
   <div class="contact-grid reveal">
 
     <div class="contact-info">
       <div class="info-item">
-        <div class="label">Email us</div>
+        <div class="label" data-i18n="contact.emailLabel">Email us</div>
         <a class="mail" href="mailto:taladigitalmedia@gmail.com">taladigitalmedia@gmail.com</a>
       </div>
 
       <div class="info-item">
-        <div class="label">Follow along</div>
+        <div class="label" data-i18n="contact.followLabel">Follow along</div>
         <div class="social-list">
           <a class="social-inline" href="https://www.facebook.com/profile.php?id=61577440992541" target="_blank" rel="noopener">
             <span class="icon"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.7-1.6h1.5V3.2C15.9 3.1 14.9 3 13.7 3 11 3 9.2 4.6 9.2 7.4v2.4H6.5V13h2.7v8h4.3z"/></svg></span>
             <span>
-              <span class="name" style="display:block;">Facebook</span>
+              <span class="name" style="display:block;" data-i18n="contact.facebook">Facebook</span>
               <span class="handle">TALA Digital Media Advertising &amp; Events</span>
             </span>
           </a>
           <a class="social-inline" href="https://www.instagram.com/taladigitalmedia/" target="_blank" rel="noopener">
             <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2.2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.2.37.6.23 1 .5 1.4.9.4.4.67.85.9 1.4.16.4.33 1.1.37 2.2.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.37 2.2a3.9 3.9 0 01-.9 1.4c-.4.4-.85.67-1.4.9-.4.16-1.1.33-2.2.37-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.2-.37a3.9 3.9 0 01-1.4-.9 3.9 3.9 0 01-.9-1.4c-.16-.4-.33-1.1-.37-2.2C2.2 15 2.2 14.7 2.2 12s.01-3 .06-4.1c.05-1.1.22-1.8.37-2.2.23-.6.5-1 .9-1.4.4-.4.85-.67 1.4-.9.4-.16 1.1-.33 2.2-.37C8 2.2 8.3 2.2 12 2.2zm0 1.8c-2.65 0-2.96.01-4 .06-.96.05-1.48.2-1.83.34-.46.18-.79.4-1.13.74-.34.34-.56.67-.74 1.13-.14.35-.3.87-.34 1.83-.05 1.04-.06 1.35-.06 4s.01 2.96.06 4c.05.96.2 1.48.34 1.83.18.46.4.79.74 1.13.34.34.67.56 1.13.74.35.14.87.3 1.83.34 1.04.05 1.35.06 4 .06s2.96-.01 4-.06c.96-.05 1.48-.2 1.83-.34.46-.18.79-.4 1.13-.74.34-.34.56-.67.74-1.13.14-.35.3-.87.34-1.83.05-1.04.06-1.35.06-4s-.01-2.96-.06-4c-.05-.96-.2-1.48-.34-1.83a2.1 2.1 0 00-.74-1.13 2.1 2.1 0 00-1.13-.74c-.35-.14-.87-.3-1.83-.34-1.04-.05-1.35-.06-4-.06zm0 3.6a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm0 1.8a2.6 2.6 0 100 5.2 2.6 2.6 0 000-5.2zm5.6-2a1.03 1.03 0 11-2.06 0 1.03 1.03 0 012.06 0z"/></svg></span>
             <span>
-              <span class="name" style="display:block;">Instagram</span>
+              <span class="name" style="display:block;" data-i18n="contact.instagram">Instagram</span>
               <span class="handle">@taladigitalmedia</span>
+            </span>
+          </a>
+          <a class="social-inline" href="https://wa.me/97433043148?text=Hi%20TALA%20Digital%20Media%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener">
+            <span class="icon icon-wa"><img src="assets/whatsapp-icon.png" alt="" loading="lazy"></span>
+            <span>
+              <span class="name" style="display:block;" data-i18n="contact.whatsapp">WhatsApp</span>
+              <span class="handle">+974 3304 3148</span>
             </span>
           </a>
         </div>
       </div>
 
       <div class="info-item">
-        <div class="label">Visit us</div>
-        <p>Building No 30, Office Building, 5th Floor<br>Street No 138, Zone 6, Doha, Qatar</p>
+        <div class="label" data-i18n="contact.visitLabel">Visit us</div>
+        <p data-i18n="contact.address">Building No 30, Office Building, 5th Floor<br>Street No 138, Zone 6, Doha, Qatar</p>
       </div>
     </div>
 
@@ -247,48 +260,48 @@
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <div class="form-row">
           <div class="field">
-            <label for="f-name">Your name</label>
-            <input type="text" id="f-name" name="name" placeholder="Full name" autocomplete="name">
-            <span class="err-msg">Please tell us your name.</span>
+            <label for="f-name" data-i18n="form.name">Your name</label>
+            <input type="text" id="f-name" name="name" placeholder="Full name" autocomplete="name" data-i18n-placeholder="form.namePh">
+            <span class="err-msg" data-i18n="form.nameErr">Please tell us your name.</span>
           </div>
           <div class="field">
-            <label for="f-email">Email</label>
-            <input type="email" id="f-email" name="email" placeholder="you@company.com" autocomplete="email">
-            <span class="err-msg">Enter a valid email address.</span>
+            <label for="f-email" data-i18n="form.email">Email</label>
+            <input type="email" id="f-email" name="email" placeholder="you@company.com" autocomplete="email" data-i18n-placeholder="form.emailPh">
+            <span class="err-msg" data-i18n="form.emailErr">Enter a valid email address.</span>
           </div>
         </div>
 
         <div class="form-row">
           <div class="field">
-            <label for="f-phone">Phone <span style="opacity:.5;">(optional)</span></label>
+            <label for="f-phone" data-i18n="form.phone">Phone <span style="opacity:.5;" data-i18n="form.optional">(optional)</span></label>
             <input type="tel" id="f-phone" name="phone" placeholder="+974 ..." autocomplete="tel">
           </div>
           <div class="field">
-            <label for="f-service">What do you need?</label>
+            <label for="f-service" data-i18n="form.service">What do you need?</label>
             <select id="f-service" name="service">
-              <option value="">Select a service</option>
-              <option value="Digital Content">Digital Content</option>
-              <option value="Events Coverage">Events Coverage</option>
-              <option value="Media Production">Media Production</option>
-              <option value="Brand Storytelling">Brand Storytelling</option>
-              <option value="Creative Direction">Creative Direction</option>
-              <option value="Something else">Something else</option>
+              <option value="" data-i18n="form.serviceSelect">Select a service</option>
+              <option value="Digital Content" data-i18n="form.opt1">Digital Content</option>
+              <option value="Events Coverage" data-i18n="form.opt2">Events Coverage</option>
+              <option value="Media Production" data-i18n="form.opt3">Media Production</option>
+              <option value="Brand Storytelling" data-i18n="form.opt4">Brand Storytelling</option>
+              <option value="Creative Direction" data-i18n="form.opt5">Creative Direction</option>
+              <option value="Something else" data-i18n="form.opt6">Something else</option>
             </select>
-            <span class="err-msg">Select what you need.</span>
+            <span class="err-msg" data-i18n="form.serviceErr">Select what you need.</span>
           </div>
         </div>
 
         <div class="field">
-          <label for="f-message">Tell us about the project</label>
-          <textarea id="f-message" name="message" placeholder="Timeline, budget range, what you're trying to achieve..."></textarea>
-          <span class="err-msg">Give us a few details (10+ characters).</span>
+          <label for="f-message" data-i18n="form.message">Tell us about the project</label>
+          <textarea id="f-message" name="message" placeholder="Timeline, budget range, what you're trying to achieve..." data-i18n-placeholder="form.messagePh"></textarea>
+          <span class="err-msg" data-i18n="form.messageErr">Give us a few details (10+ characters).</span>
         </div>
 
         <div class="form-foot">
           <button type="submit" class="btn" id="formSubmit">
-            <span class="btn-label">Send inquiry</span>
+            <span class="btn-label" data-i18n="form.submit">Send inquiry</span>
           </button>
-          <p class="form-note">Sends straight to our inbox — no email app needed on your end.</p>
+          <p class="form-note" data-i18n="form.note">Sends straight to our inbox — no email app needed on your end.</p>
         </div>
         <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
       </form>
@@ -301,13 +314,13 @@
   <div class="map-panel reveal">
     <div class="map-caption">
       <div>
-        <h3>TALA Digital Media Advertising &amp; Events</h3>
-        <p>Building No 30, Office Building, 5th Floor, Street No 138, Zone 6 — Doha, Qatar.</p>
+        <h3 data-i18n="map.title">TALA Digital Media Advertising &amp; Events</h3>
+        <p data-i18n="map.caption">Building No 30, Office Building, 5th Floor, Street No 138, Zone 6 — Doha, Qatar.</p>
       </div>
-      <a href="https://maps.app.goo.gl/rVitD5RRP86TxVhg9" target="_blank" rel="noopener" class="map-open">Open in Google Maps ↗</a>
+      <a href="https://maps.app.goo.gl/rVitD5RRP86TxVhg9" target="_blank" rel="noopener" class="map-open" data-i18n="map.open">Open in Google Maps ↗</a>
     </div>
     <div class="map-frame">
-      <div class="map-badge"><span class="ping"></span>TALA Digital Media Advertising &amp; Events</div>
+      <div class="map-badge"><span class="ping"></span><span data-i18n="map.badge">TALA Digital Media Advertising &amp; Events</span></div>
       <iframe
         src="https://www.google.com/maps?q=TALA+Digital+Media+Advertising+%26+Events,+Building+No+30,+Street+138,+Zone+6,+Doha,+Qatar&output=embed"
         loading="lazy"
@@ -319,10 +332,20 @@
 </section>
 
 <footer>
-  <div class="fmark">TALA Digital Media Advertising &amp; Events © <span id="year"></span></div>
-  <div>Doha, Qatar — Creative Media &amp; Production</div>
+  <div class="fmark"><span data-i18n="footer.brand">TALA Digital Media Advertising &amp; Events</span> © <span id="year"></span></div>
+  <div data-i18n="footer.tagline">Doha, Qatar — Creative Media &amp; Production</div>
   <a href="#top" class="to-top" aria-label="Back to top">↑</a>
 </footer>
+
+<a
+  href="https://wa.me/97433043148?text=Hi%20TALA%20Digital%20Media%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
+  target="_blank"
+  rel="noopener"
+  class="wa-float"
+  aria-label="Chat with TALA Digital Media on WhatsApp">
+  <span class="wa-ring"></span>
+  <img src="assets/whatsapp-icon.png" alt="">
+</a>
 
 <script src="script.js"></script>
 </body>
