@@ -456,6 +456,12 @@ h1.hero-title em{
 .social-inline:hover .icon.icon-wa{background:transparent;}
 .social-inline .name{font-size:.95rem; font-weight:500;}
 .social-inline .handle{font-family:var(--mono); font-size:.72rem; color:rgba(243,237,225,0.5);}
+.social-inline .handle-list{display:flex; gap:14px; flex-wrap:wrap;}
+.social-inline .handle-list a{
+  font-family:var(--mono); font-size:.72rem; color:rgba(243,237,225,0.6);
+  border-bottom:1px solid transparent; transition:color .25s ease, border-color .25s ease;
+}
+.social-inline .handle-list a:hover{color:#3fbf5f; border-color:#3fbf5f;}
 
 /* form */
 .form-panel{
@@ -711,7 +717,7 @@ footer .fmark{font-family:var(--display); font-weight:600; color:var(--off-white
 @media (hover: none) and (pointer: coarse){
   .btn{padding-top:16px; padding-bottom:16px;}
   nav.links a{padding:10px 0;}
-  .social-inline, .social-row{padding-top:14px; padding-bottom:14px;}
+  .social-inline{padding-top:14px; padding-bottom:14px;}
   .work-video .play-btn{width:64px; height:64px; opacity:1;}
 }
 
@@ -726,6 +732,7 @@ footer .fmark{font-family:var(--display); font-weight:600; color:var(--off-white
   display:flex; align-items:center; justify-content:center;
   box-shadow:0 10px 26px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
   transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+  border:none; padding:0; font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent;
 }
 .float-btn:hover{
   transform:translateY(-4px) scale(1.06) perspective(600px) rotateX(6deg);
@@ -739,9 +746,35 @@ footer .fmark{font-family:var(--display); font-weight:600; color:var(--off-white
 .float-badrgo{background:#fff; overflow:hidden;}
 .float-badrgo img{width:72%; height:72%; object-fit:contain;}
 
+.float-wa-wrap{position:relative;}
 .float-wa{
   width:62px; height:62px;
   background:linear-gradient(145deg,#3fbf5f,#1f9a45);
+}
+.float-wa-menu{
+  position:absolute; bottom:calc(100% + 14px); right:0;
+  min-width:186px;
+  background:var(--charcoal-2); border:1px solid var(--line);
+  padding:10px; display:flex; flex-direction:column; gap:4px;
+  box-shadow:0 16px 40px rgba(0,0,0,0.5);
+  opacity:0; pointer-events:none; transform:translateY(8px) scale(.97); transform-origin:bottom right;
+  transition:opacity .22s ease, transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.float-wa-menu.show{opacity:1; pointer-events:auto; transform:translateY(0) scale(1);}
+.float-wa-menu-label{
+  font-family:var(--mono); font-size:.64rem; text-transform:uppercase; letter-spacing:.08em;
+  color:rgba(243,237,225,0.45); padding:4px 10px 6px;
+}
+.float-wa-menu a{
+  font-family:var(--display); font-weight:500; font-size:.9rem; color:var(--off-white);
+  padding:9px 10px; border-radius:5px; transition:background .2s ease, color .2s ease;
+  white-space:nowrap;
+}
+.float-wa-menu a:hover{background:rgba(63,191,95,0.14); color:#3fbf5f;}
+html[dir="rtl"] .float-wa-menu{right:auto; left:0; transform-origin:bottom left;}
+@media(max-width:600px){
+  .float-wa-menu{min-width:170px; right:-6px;}
+  html[dir="rtl"] .float-wa-menu{left:-6px;}
 }
 .wa-ring{
   position:absolute; inset:0; border-radius:50%;
@@ -772,8 +805,7 @@ body.lang-ar .about-title,
 body.lang-ar .work-title,
 body.lang-ar .contact-title,
 body.lang-ar .story-mark,
-body.lang-ar .founder-tag strong,
-body.lang-ar .connect-title{
+body.lang-ar .founder-tag strong{
   font-family:'Cairo', var(--display);
   font-style:normal;
 }
@@ -800,7 +832,6 @@ html[dir="rtl"] .scroll-cue{left:auto; right:clamp(20px,5vw,64px);}
 html[dir="rtl"] .hero-meta{right:auto; left:clamp(20px,5vw,64px); text-align:left;}
 html[dir="rtl"] .hero-watermark{right:auto; left:clamp(-60px,-2vw,20px);}
 html[dir="rtl"] .social-inline:hover{transform:translateX(-6px);}
-html[dir="rtl"] .social-row:hover .arrow{transform:translateX(-6px) rotate(180deg);}
 html[dir="rtl"] .float-stack{right:auto; left:clamp(16px,3vw,32px);}
 html[dir="rtl"] .hours-row.is-today{border-left:none; border-right:2px solid var(--sand);}
 html[dir="rtl"] .work-swipe-hint svg{transform:scaleX(-1);}
@@ -883,6 +914,57 @@ nav.links a.active-link::after{width:100%;}
 
 
 /* ---------- WORKSHOPS ANNOUNCEMENT POPUP ---------- */
+/* ---------- PERSISTENT WORKSHOPS TAB ---------- */
+/* A bookmark-style tab on the screen edge so the workshops schedule stays
+   findable even after someone closes the popup — click it anytime to
+   reopen. Deliberately distinct from the site's usual charcoal/sand
+   palette (uses the poster's own gold-to-maroon warmth) so it reads as
+   its own little "event badge" rather than blending into the nav. */
+.workshops-tab{
+  position:fixed; left:0; top:50%; transform:translateY(-50%);
+  z-index:250;
+  writing-mode:vertical-rl; text-orientation:mixed;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  padding:20px 9px;
+  background:linear-gradient(200deg, var(--sand-light) 0%, var(--sand) 45%, var(--maroon) 130%);
+  color:var(--charcoal);
+  border:1px solid rgba(0,0,0,0.15); border-left:none;
+  border-radius:0 12px 12px 0;
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700;
+  cursor:pointer;
+  box-shadow:5px 0 20px rgba(0,0,0,0.4);
+  transition:padding-left .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+}
+.workshops-tab:hover{
+  padding-left:15px;
+  box-shadow:7px 0 26px rgba(0,0,0,0.5);
+}
+.workshops-tab-star{
+  font-size:1rem; line-height:1;
+  animation:tab-star-spin 6s linear infinite;
+}
+@keyframes tab-star-spin{
+  0%, 85%, 100%{transform:rotate(0deg);}
+  92%{transform:rotate(180deg);}
+}
+@media (prefers-reduced-motion: reduce){
+  .workshops-tab-star{animation:none;}
+}
+@media(max-width:600px){
+  .workshops-tab{padding:16px 7px; font-size:.64rem; gap:8px;}
+  .workshops-tab-star{font-size:.9rem;}
+}
+html[dir="rtl"] .workshops-tab{
+  left:auto; right:0;
+  border-left:1px solid rgba(0,0,0,0.15); border-right:none;
+  border-radius:12px 0 0 12px;
+  box-shadow:-5px 0 20px rgba(0,0,0,0.4);
+}
+html[dir="rtl"] .workshops-tab:hover{
+  padding-left:9px; padding-right:15px;
+  box-shadow:-7px 0 26px rgba(0,0,0,0.5);
+}
+
 .popup-overlay{
   position:fixed; inset:0; z-index:300;
   background:rgba(10,9,8,0.72); backdrop-filter:blur(6px);
@@ -946,11 +1028,28 @@ nav.links a.active-link::after{width:100%;}
 }
 .popup-cta .btn{flex:1 1 200px; text-align:center; justify-content:center;}
 
+.popup-phones{
+  margin-top:20px; padding-top:18px; border-top:1px solid var(--line);
+  text-align:center;
+}
+.popup-phones-label{
+  display:block; font-family:var(--mono); font-size:.68rem; text-transform:uppercase;
+  letter-spacing:.1em; color:rgba(243,237,225,0.5); margin-bottom:10px;
+}
+.popup-phones-list{display:flex; gap:20px; flex-wrap:wrap; justify-content:center;}
+.popup-phones-list a{
+  font-family:var(--display); font-weight:600; font-size:.95rem; color:var(--sand-light);
+  border-bottom:1px solid var(--line); padding-bottom:2px;
+  transition:color .3s ease, border-color .3s ease;
+}
+.popup-phones-list a:hover{color:var(--sand); border-color:var(--sand);}
+
 @media(max-width:600px){
   .popup-card{max-height:92vh;}
   .popup-body{padding:24px 20px;}
   .popup-item-when{white-space:normal;}
   .popup-cta{flex-direction:column;}
+  .popup-phones-list{gap:16px;}
 }
 
 /* ultra-narrow phones (iPhone SE, small Android, ~360px and under) */

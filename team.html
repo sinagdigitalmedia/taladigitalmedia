@@ -135,23 +135,36 @@
     title="Book a ride on BadrGo">
     <img src="assets/badrgo-icon.png" alt="">
   </a>
-  <a
-    href="https://wa.me/97433043148?text=Hi%20TALA%20Digital%20Media%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
-    target="_blank"
-    rel="noopener"
-    class="float-btn float-wa"
-    aria-label="Chat with TALA Digital Media on WhatsApp"
-    title="Chat on WhatsApp">
-    <span class="wa-ring"></span>
-    <img src="assets/whatsapp-icon.png" alt="">
-  </a>
+  <div class="float-wa-wrap">
+    <button
+      type="button"
+      class="float-btn float-wa"
+      id="floatWaBtn"
+      aria-label="Chat with TALA Digital Media on WhatsApp"
+      aria-haspopup="true"
+      aria-expanded="false"
+      title="Chat on WhatsApp">
+      <span class="wa-ring"></span>
+      <img src="assets/whatsapp-icon.png" alt="">
+    </button>
+    <div class="float-wa-menu" id="floatWaMenu">
+      <span class="float-wa-menu-label" data-i18n="wa.chooseNumber">Choose a number</span>
+      <a href="https://wa.me/97466078911?text=Hi%20TALA%20Digital%20Media%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener">+974 6607 8911</a>
+      <a href="https://wa.me/97433043148?text=Hi%20TALA%20Digital%20Media%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener">+974 3304 3148</a>
+    </div>
+  </div>
 </div>
+
+<button type="button" class="workshops-tab" id="workshopsTab" aria-label="Open Sinag Events workshops schedule" aria-haspopup="dialog">
+  <span class="workshops-tab-star" aria-hidden="true">★</span>
+  <span data-i18n="popup.tabLabel">Workshops</span>
+</button>
 
 <div class="popup-overlay" id="workshopPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-hidden="true">
   <div class="popup-card" data-tilt data-tilt-max="1.5">
     <button type="button" class="popup-close" id="popupClose" aria-label="Close">✕</button>
 
-    <img src="assets/sinag-workshops-poster.jpg" alt="Sinag Events Workshops poster — full schedule for Acting, Ballroom, Building a Band, Charcoal &amp; Acrylic, Hip Hop, Sinag Fashion Camp, and Hosting workshops" class="popup-poster">
+    <img src="assets/sinag-workshops-poster-v2.jpg" alt="Sinag Events Workshops poster — full schedule for Acting, Ballroom, Building a Band, Charcoal &amp; Acrylic, Hip Hop, Sinag Fashion Camp, and Hosting workshops" class="popup-poster">
 
     <div class="popup-body">
     <div class="popup-eyebrow eyebrow" data-i18n="popup.eyebrow">Sinag Events</div>
@@ -195,7 +208,13 @@
 
     <div class="popup-cta">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSc-1vV7N0PHXBQpoOtuFg1795bMgcHtctrHYakaLnl0Bbj46A/viewform?usp=header" target="_blank" rel="noopener" class="btn" data-i18n="popup.formBtn">Sign up via Google Form</a>
-      <a href="https://wa.me/97433043148" target="_blank" rel="noopener" class="btn ghost" data-i18n="popup.callBtn">Contact +974 3304 3148</a>
+    </div>
+    <div class="popup-phones">
+      <span class="popup-phones-label" data-i18n="popup.orCall">Or contact us directly</span>
+      <div class="popup-phones-list">
+        <a href="https://wa.me/97466078911" target="_blank" rel="noopener">+974 6607 8911</a>
+        <a href="https://wa.me/97433043148" target="_blank" rel="noopener">+974 3304 3148</a>
+      </div>
     </div>
     </div>
   </div>

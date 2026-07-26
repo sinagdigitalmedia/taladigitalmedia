@@ -201,7 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'popup.w7Name': 'Hosting Workshop',
       'popup.w7When': 'Aug 3 – 19 · Mon & Tue · 2PM',
       'popup.formBtn': 'Sign up via Google Form',
-      'popup.callBtn': 'Contact +974 3304 3148',
+      'popup.orCall': 'Or contact us directly',
+      'popup.tabLabel': 'Workshops',
       'rentals.eyebrow': 'Also available',
       'rentals.title': 'Studio rentals.',
       'rentals.body': 'Need the space, not the crew? Our fully equipped production and audio studio in Doha is available to rent by the hour or by the day — bring your own team, or work solo.',
@@ -242,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'contact.facebook': 'Facebook',
       'contact.instagram': 'Instagram',
       'contact.whatsapp': 'WhatsApp',
+      'wa.chooseNumber': 'Choose a number',
       'contact.visitLabel': 'Visit us',
       'contact.address': 'Building No 30, Office Building, 5th Floor<br>Street No 138, Zone 6, Doha, Qatar',
       'form.name': 'Your name',
@@ -367,7 +369,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'popup.w7Name': 'ورشة تقديم البرامج',
       'popup.w7When': '3 – 19 أغسطس · الاثنين والثلاثاء · 2 ظهراً',
       'popup.formBtn': 'التسجيل عبر نموذج جوجل',
-      'popup.callBtn': 'تواصل +974 3304 3148',
+      'popup.orCall': 'أو تواصلوا معنا مباشرة',
+      'popup.tabLabel': 'الورش',
       'rentals.eyebrow': 'متوفر أيضاً',
       'rentals.title': 'تأجير الاستوديو.',
       'rentals.body': 'تحتاج المساحة فقط دون الطاقم؟ استوديو الإنتاج والصوت المجهز بالكامل لدينا في الدوحة متاح للإيجار بالساعة أو باليوم — أحضر فريقك الخاص، أو اعمل بمفردك.',
@@ -408,6 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'contact.facebook': 'فيسبوك',
       'contact.instagram': 'إنستغرام',
       'contact.whatsapp': 'واتساب',
+      'wa.chooseNumber': 'اختر رقماً',
       'contact.visitLabel': 'زوروا مكتبنا',
       'contact.address': 'مبنى رقم 30، الطابق الخامس<br>شارع رقم 138، المنطقة 6، الدوحة، قطر',
       'form.name': 'الاسم الكامل',
@@ -607,6 +611,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* ---------- floating WhatsApp number picker ---------- */
+  const floatWaBtn = document.getElementById('floatWaBtn');
+  const floatWaMenu = document.getElementById('floatWaMenu');
+  if (floatWaBtn && floatWaMenu) {
+    function closeWaMenu() {
+      floatWaMenu.classList.remove('show');
+      floatWaBtn.setAttribute('aria-expanded', 'false');
+    }
+    function toggleWaMenu(e) {
+      e.stopPropagation();
+      const isOpen = floatWaMenu.classList.toggle('show');
+      floatWaBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+    floatWaBtn.addEventListener('click', toggleWaMenu);
+    document.addEventListener('click', (e) => {
+      if (!floatWaMenu.contains(e.target) && e.target !== floatWaBtn) closeWaMenu();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeWaMenu();
+    });
+  }
+
   /* ---------- work showreel video controls ---------- */
   document.querySelectorAll('.work-video').forEach(wrap => {
     const video = wrap.querySelector('video');
@@ -782,8 +808,17 @@ Message: ${fields.message.value.trim()}`;
   // run ends. Update or remove POPUP_EXPIRY when the campaign is over.
   const POPUP_EXPIRY = new Date('2026-09-06T00:00:00+03:00'); // day after Building a Band wraps
   const popup = document.getElementById('workshopPopup');
+  const workshopsTab = document.getElementById('workshopsTab');
+  const campaignActive = new Date() < POPUP_EXPIRY;
 
-  if (popup && new Date() < POPUP_EXPIRY) {
+  // The edge tab is the permanent way back in after someone closes the
+  // popup — but once the campaign's expiry date passes, remove it too,
+  // so nothing stale lingers on the site.
+  if (workshopsTab && !campaignActive) {
+    workshopsTab.remove();
+  }
+
+  if (popup && campaignActive) {
     const popupClose = document.getElementById('popupClose');
     const SEEN_KEY = 'tala-workshops-popup-seen';
 
@@ -814,6 +849,10 @@ Message: ${fields.message.value.trim()}`;
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && popup.classList.contains('show')) closePopup();
     });
+
+    // The tab always reopens the popup on demand, regardless of whether
+    // the automatic first-visit popup has already been seen this session.
+    if (workshopsTab) workshopsTab.addEventListener('click', openPopup);
   }
 
 });

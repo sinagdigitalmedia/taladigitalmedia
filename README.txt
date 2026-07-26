@@ -16,8 +16,9 @@ assets/
   badrgo-icon.png     BadrGo brand icon (floating button + ride booking)
   instagram-icon.png  Instagram brand icon (available if you want to swap
                        it in for the current inline SVG version)
-  sinag-workshops-poster.jpg  Workshops poster shown in the announcement
-                       popup (compressed copy of the original you sent)
+  sinag-workshops-poster-v2.jpg  Workshops poster shown in the
+                       announcement popup (compressed copy of the poster
+                       you provided)
   team/               Cropped photos for the six people on the Team page
   posters/            Thumbnail frame for each showreel video
   videos/             Compressed, web-ready MP4s shown in the "Work" section
@@ -63,16 +64,22 @@ KEY EDIT POINTS
   glitch there. Tilt and the hero watermark parallax are automatically
   disabled on touch devices and when the visitor has "reduce motion" turned
   on, so nothing needs to be touched for mobile.
-- Floating action buttons: a stacked group in the bottom-right corner,
-  visible on every page — Uber and BadrGo on top, WhatsApp at the bottom.
-  All three link straight to the studio: Uber opens with the dropoff
-  address pre-filled, BadrGo opens the app itself (see RIDE BOOKING below
-  for why BadrGo can't pre-fill a destination), and WhatsApp opens a chat
-  pre-filled with an intro message, currently pointed at +974 3304 3148.
-  To change the WhatsApp number, update the two "https://wa.me/974..."
-  links in index.html (search for "wa.me") — no plus sign or spaces in the
-  digits. The same three buttons (plus the full address/hours) also live
-  inline in the Location section for anyone who scrolls past the float.
+- Floating action buttons: a stacked group in the bottom-right corner
+  (left in Arabic/RTL), visible on every page — Uber and BadrGo on top,
+  WhatsApp at the bottom. Uber opens with the dropoff address pre-filled;
+  BadrGo opens the app itself (see RIDE BOOKING below for why BadrGo
+  can't pre-fill a destination). WhatsApp is a button, not a link — click
+  it and a small popover opens above it listing both numbers
+  (+974 6607 8911 and +974 3304 3148) so the visitor picks which one to
+  message; picking one opens that chat pre-filled with an intro message.
+  Closes if you click elsewhere, press Escape, or click the button again.
+  To change either number, search styles.css/script.js/index.html/
+  team.html for "97466078911" or "97433043148" — both appear in the
+  floating popover, the Contact section's WhatsApp entry, and the
+  workshops popup, so a full-site number change means updating all of
+  those spots consistently. The same Uber/BadrGo/WhatsApp buttons (plus
+  the full address/hours) also live inline in the Location section for
+  anyone who scrolls past the float.
 - Language switcher: an EN / AR pill in the header (visible on every page,
   desktop and mobile) swaps all visible copy between English and Arabic,
   flips the page to right-to-left, and switches to the Cairo typeface for
@@ -99,8 +106,15 @@ choosing it.
   itself, nothing else to do.
 - SEND VIA WHATSAPP validates the fields, then opens a new tab with
   WhatsApp pre-filled with the same inquiry, addressed to
-  +974 3304 3148 (wa.me/97433043148). The client still needs to tap
-  "Send" once inside WhatsApp — there's no way for a plain website to
+  +974 3304 3148 (wa.me/97433043148) — the main studio line. This one
+  stays a single destination on purpose: it's a form submission, not a
+  "pick a number" moment, so adding a second choice here would slow down
+  the one action that matters (getting the inquiry sent). The floating
+  WhatsApp button and the Contact section's WhatsApp entry are where
+  visitors get to choose between both numbers instead. If you'd rather
+  the form default to +974 6607 8911, search script.js for
+  "buildWhatsAppUrl" and swap the number there. The client still needs to
+  tap "Send" once inside WhatsApp — there's no way for a plain website to
   silently deliver a WhatsApp message on someone's behalf without
   WhatsApp's official Business API (which needs a paid Meta Business
   account and a server, not just a static site). This is the closest
@@ -282,8 +296,10 @@ BEFORE YOU GO LIVE — QUICK CHECKLIST
     in the Contact section — both should scroll to the form now, not
     open your email app. If either still opens mailto, the browser may
     be caching an old version of the page; hard-refresh to confirm.
-[ ] Confirm the WhatsApp number (+974 3304 3148) and email address are
-    correct throughout.
+[ ] Confirm both WhatsApp numbers (+974 6607 8911 and +974 3304 3148) and
+    the email address are correct throughout.
+[ ] Click the floating WhatsApp button (bottom-right) and confirm the
+    popover shows both numbers and each opens the right chat.
 [ ] Double-check the Google Maps pin under #location opens the right spot.
 [ ] Test all three Uber buttons open with the full address and land
     close to the pin.
@@ -301,8 +317,10 @@ BEFORE YOU GO LIVE — QUICK CHECKLIST
 [ ] Test the EN / AR language toggle and the mobile menu on an actual phone.
 [ ] Open the site in a fresh/incognito browser tab and confirm the
     workshops popup appears after ~1 second, shows the poster image
-    correctly, the Google Form link opens, and the WhatsApp button opens
-    a chat to +974 3304 3148.
+    correctly, the Google Form link opens, and both WhatsApp numbers
+    (+974 6607 8911 and +974 3304 3148) open a chat correctly.
+[ ] Close the popup, then click the gold "WORKSHOPS" tab on the left
+    edge of the screen and confirm it reopens the popup.
 [ ] The Charcoal (Aug 1–8) and Acrylic (Aug 10–17) dates in the text list
     now match the poster exactly — worth one more glance since the rest
     of the list was originally transcribed by hand.
@@ -311,26 +329,37 @@ SINAG EVENTS WORKSHOPS POPUP
 -----------------------------
 A temporary announcement modal appears on both pages (index.html and
 team.html) about 1.2 seconds after a first-time visitor loads the site.
-It shows your actual workshops poster image at the top
-(assets/sinag-workshops-poster.jpg — a compressed copy of the poster you
-provided), followed by a text list of all eight workshop sessions
+It shows your workshops poster image at the top
+(assets/sinag-workshops-poster-v2.jpg — a compressed copy of the poster
+you provided), followed by a text list of all eight workshop sessions
 (Charcoal and Acrylic are split into two rows since they run on different
-dates) with dates/times, and two CTAs — the Google Form and a WhatsApp
-link to +974 3304 3148. It only shows once per browser session
-(sessionStorage), and won't reappear if the visitor closes it and keeps
-browsing, or comes back later in the same session. Closes via the ×
-button, clicking outside the card, or the Escape key.
+dates) with dates/times, a "Sign up via Google Form" button, and both
+phone numbers as tappable WhatsApp links (+974 6607 8911 and
++974 3304 3148). It only auto-opens once per browser session
+(sessionStorage), and won't reappear on its own if the visitor closes it
+and keeps browsing, or comes back later in the same session.
 
-It's genuinely temporary — script.js has a `POPUP_EXPIRY` date
-(currently the day after the last workshop, "Building a Band," wraps on
-Sep 5, 2026) near the bottom of the file. Past that date, the popup stops
-appearing automatically — nothing to remember to remove. To end the
-campaign earlier, just change that date; to run it again for a future
-batch of workshops, update the date, swap in a new poster image at that
-same file path (or a new filename — just update the <img src=""> in both
-HTML files), and update the text list entries (both the HTML in
-index.html/team.html and the matching `popup.*` keys in script.js —
-names, dates/times, and the two link URLs).
+PERSISTENT "WORKSHOPS" TAB — findable even after closing the popup
+---------------------------------------------------------------------
+Closing the popup doesn't lose access to it. A small vertical tab —
+"WORKSHOPS" with a spinning gold star — sits fixed on the left edge of
+the screen (right edge in Arabic/RTL) on every page, the whole time the
+campaign is active. Click it anytime to reopen the popup, no matter how
+many times it's been closed or how long ago. It's deliberately styled in
+the poster's own gold-to-maroon warmth rather than the site's usual
+charcoal/sand palette, so it reads as its own little event badge — a
+"surprise" detail rather than another nav item.
+
+Both the popup and the tab share the same expiry logic — script.js has a
+`POPUP_EXPIRY` date (currently the day after the last workshop, "Building
+a Band," wraps on Sep 5, 2026). Past that date, BOTH the popup and the
+tab stop appearing automatically, and the tab removes itself from the
+page entirely — nothing stale left behind to remember to clean up. To end
+the campaign earlier, just change that date. To run it again for a future
+batch of workshops: update the date, swap in a new poster image (update
+the <img src=""> in both HTML files if the filename changes), and update
+the text list entries and phone numbers (both the HTML in
+index.html/team.html and the matching `popup.*` keys in script.js).
 
 DESIGN NOTES
 ------------
@@ -366,6 +395,15 @@ DESIGN NOTES
   interactive element (buttons, nav links, social icons) meets a
   comfortable tap-target size on touch devices; verified no element
   causes horizontal page scroll on small screens.
+- WhatsApp number picker: the floating WhatsApp button changed from a
+  direct link to a button that opens a small popover with both numbers —
+  see the CONTACT FORM section above for exactly where each WhatsApp
+  touchpoint lives and how to update numbers across all of them.
+- Code cleanup: removed a handful of leftover, unused CSS rules from
+  earlier design iterations (an old ".social-row"/"arrow" hover pattern
+  and a duplicate ".connect-title" selector that were never actually
+  referenced by the current markup). No visual change — just less dead
+  weight in styles.css.
 
 BROWSER SUPPORT
 ----------------
