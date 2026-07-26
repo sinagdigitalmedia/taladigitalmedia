@@ -181,6 +181,27 @@ document.addEventListener('DOMContentLoaded', () => {
       'team.role5Title': 'Events Coordinator & Administrative Secretary',
       'team.ctaText': 'Want to work with us on your next project?',
       'team.ctaBtn': 'Get in touch',
+      'popup.eyebrow': 'Sinag Events',
+      'popup.title': 'Workshops are open this August.',
+      'popup.sub': 'A full lineup of creative workshops running through Doha this season — pick the ones that fit your schedule.',
+      'popup.w1Name': 'Acting Workshop',
+      'popup.w1When': 'Aug 7 – 21 · Fridays · 10AM–12PM',
+      'popup.w2Name': 'Ballroom Workshop',
+      'popup.w2When': 'Aug 7 – 21 · Fridays · 6–8PM',
+      'popup.w3Name': 'Building a Band Workshop',
+      'popup.w3When': 'Aug 1 – Sep 5 · Saturdays · 1–5PM',
+      'popup.w4aName': 'Charcoal Workshop',
+      'popup.w4aWhen': 'Aug 1 – 8 · Mon & Sat · 5–7PM',
+      'popup.w4bName': 'Acrylic Workshop',
+      'popup.w4bWhen': 'Aug 10 – 17 · Fridays · 3:30–5:30PM',
+      'popup.w5Name': 'Hip Hop Workshop',
+      'popup.w5When': 'Aug 2 – 25 · Sun & Tue · 6–8PM',
+      'popup.w6Name': 'Sinag Fashion Camp — Year 2',
+      'popup.w6When': 'Aug 1 – 27 · Thu & Sat · 5:30–7:30PM',
+      'popup.w7Name': 'Hosting Workshop',
+      'popup.w7When': 'Aug 3 – 19 · Mon & Tue · 2PM',
+      'popup.formBtn': 'Sign up via Google Form',
+      'popup.callBtn': 'Contact +974 3304 3148',
       'rentals.eyebrow': 'Also available',
       'rentals.title': 'Studio rentals.',
       'rentals.body': 'Need the space, not the crew? Our fully equipped production and audio studio in Doha is available to rent by the hour or by the day — bring your own team, or work solo.',
@@ -325,6 +346,27 @@ document.addEventListener('DOMContentLoaded', () => {
       'team.role5Title': 'منسقة الفعاليات والسكرتيرة الإدارية',
       'team.ctaText': 'هل تريد العمل معنا في مشروعك القادم؟',
       'team.ctaBtn': 'تواصل معنا',
+      'popup.eyebrow': 'فعاليات سيناغ',
+      'popup.title': 'الورش مفتوحة خلال أغسطس.',
+      'popup.sub': 'مجموعة كاملة من الورش الإبداعية تُقام في الدوحة هذا الموسم — اختر ما يناسب جدولك.',
+      'popup.w1Name': 'ورشة التمثيل',
+      'popup.w1When': '7 – 21 أغسطس · كل جمعة · 10 صباحاً – 12 ظهراً',
+      'popup.w2Name': 'ورشة الرقص الاجتماعي',
+      'popup.w2When': '7 – 21 أغسطس · كل جمعة · 6 – 8 مساءً',
+      'popup.w3Name': 'ورشة تكوين فرقة موسيقية',
+      'popup.w3When': '1 أغسطس – 5 سبتمبر · كل سبت · 1 – 5 عصراً',
+      'popup.w4aName': 'ورشة الفحم',
+      'popup.w4aWhen': '1 – 8 أغسطس · الاثنين والسبت · 5 – 7 مساءً',
+      'popup.w4bName': 'ورشة الأكريليك',
+      'popup.w4bWhen': '10 – 17 أغسطس · كل جمعة · 3:30 – 5:30 مساءً',
+      'popup.w5Name': 'ورشة الهيب هوب',
+      'popup.w5When': '2 – 25 أغسطس · الأحد والثلاثاء · 6 – 8 مساءً',
+      'popup.w6Name': 'معسكر سيناغ للأزياء — السنة الثانية',
+      'popup.w6When': '1 – 27 أغسطس · الخميس والسبت · 5:30 – 7:30 مساءً',
+      'popup.w7Name': 'ورشة تقديم البرامج',
+      'popup.w7When': '3 – 19 أغسطس · الاثنين والثلاثاء · 2 ظهراً',
+      'popup.formBtn': 'التسجيل عبر نموذج جوجل',
+      'popup.callBtn': 'تواصل +974 3304 3148',
       'rentals.eyebrow': 'متوفر أيضاً',
       'rentals.title': 'تأجير الاستوديو.',
       'rentals.body': 'تحتاج المساحة فقط دون الطاقم؟ استوديو الإنتاج والصوت المجهز بالكامل لدينا في الدوحة متاح للإيجار بالساعة أو باليوم — أحضر فريقك الخاص، أو اعمل بمفردك.',
@@ -717,6 +759,45 @@ Message: ${fields.message.value.trim()}`;
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (emailBtn) emailBtn.click();
+    });
+  }
+
+  /* ---------- Sinag Events workshops announcement popup ---------- */
+  // Temporary — automatically stops appearing after the last workshop's
+  // run ends. Update or remove POPUP_EXPIRY when the campaign is over.
+  const POPUP_EXPIRY = new Date('2026-09-06T00:00:00+03:00'); // day after Building a Band wraps
+  const popup = document.getElementById('workshopPopup');
+
+  if (popup && new Date() < POPUP_EXPIRY) {
+    const popupClose = document.getElementById('popupClose');
+    const SEEN_KEY = 'tala-workshops-popup-seen';
+
+    function openPopup() {
+      popup.classList.add('show');
+      popup.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup() {
+      popup.classList.remove('show');
+      popup.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      try { sessionStorage.setItem(SEEN_KEY, '1'); } catch (e) { /* ignore */ }
+    }
+
+    let alreadySeen = false;
+    try { alreadySeen = sessionStorage.getItem(SEEN_KEY) === '1'; } catch (e) { /* ignore */ }
+
+    if (!alreadySeen) {
+      setTimeout(openPopup, 1200);
+    }
+
+    if (popupClose) popupClose.addEventListener('click', closePopup);
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) closePopup();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popup.classList.contains('show')) closePopup();
     });
   }
 

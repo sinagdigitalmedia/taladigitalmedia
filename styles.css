@@ -846,3 +846,74 @@ html[dir="rtl"] .map-open{direction:ltr; display:inline-block;}
 nav.links a.active-link{opacity:1; color:var(--sand-light);}
 nav.links a.active-link::after{width:100%;}
 
+
+/* ---------- WORKSHOPS ANNOUNCEMENT POPUP ---------- */
+.popup-overlay{
+  position:fixed; inset:0; z-index:300;
+  background:rgba(10,9,8,0.72); backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+  opacity:0; pointer-events:none;
+  transition:opacity .35s ease;
+}
+.popup-overlay.show{opacity:1; pointer-events:auto;}
+
+.popup-card{
+  position:relative;
+  width:100%; max-width:560px; max-height:88vh; overflow-y:auto;
+  background:var(--charcoal-2); border:1px solid var(--line);
+  padding:0;
+  box-shadow:0 30px 80px rgba(0,0,0,0.55);
+  transform:translateY(18px) scale(.98);
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.popup-overlay.show .popup-card{transform:translateY(0) scale(1);}
+
+.popup-poster{
+  width:100%; height:auto; display:block;
+  border-bottom:1px solid var(--line);
+}
+.popup-body{
+  padding:clamp(28px,4vw,44px);
+}
+
+.popup-close{
+  position:absolute; top:14px; right:14px; z-index:2;
+  width:36px; height:36px; border-radius:50%;
+  border:1px solid rgba(243,237,225,0.4); background:rgba(15,14,13,0.65); backdrop-filter:blur(4px);
+  color:rgba(243,237,225,0.85);
+  font-size:.85rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:border-color .3s ease, color .3s ease, transform .3s ease, background .3s ease;
+}
+.popup-close:hover{border-color:var(--sand); color:var(--sand-light); background:rgba(15,14,13,0.85); transform:rotate(90deg);}
+
+.popup-eyebrow{margin-bottom:16px;}
+.popup-title{
+  font-family:var(--display); font-weight:600; font-size:clamp(1.5rem,3vw,2rem); line-height:1.15;
+}
+.popup-sub{
+  margin-top:12px; font-size:.95rem; line-height:1.65; color:rgba(243,237,225,0.68); font-weight:300; max-width:48ch;
+}
+
+.popup-list{
+  margin-top:26px; border-top:1px solid var(--line);
+}
+.popup-item{
+  display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;
+  padding:13px 2px; border-bottom:1px solid var(--line);
+}
+.popup-item-name{font-family:var(--display); font-weight:500; font-size:.96rem; color:var(--off-white);}
+.popup-item-when{font-family:var(--mono); font-size:.72rem; letter-spacing:.02em; color:var(--sand); white-space:nowrap;}
+
+.popup-cta{
+  margin-top:28px; display:flex; gap:14px; flex-wrap:wrap;
+}
+.popup-cta .btn{flex:1 1 200px; text-align:center; justify-content:center;}
+
+@media(max-width:600px){
+  .popup-card{max-height:92vh;}
+  .popup-body{padding:24px 20px;}
+  .popup-item-when{white-space:normal;}
+  .popup-cta{flex-direction:column;}
+}
