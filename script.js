@@ -155,18 +155,26 @@ document.addEventListener('DOMContentLoaded', () => {
       'about.pillar2Body': 'Full-scale execution — content, coverage, and media crafted with technical precision.',
       'about.pillar3Title': 'Partnership',
       'about.pillar3Body': 'Reliable, results-oriented collaboration built to outlast a single project.',
+      'journey.eyebrow': 'Our journey',
+      'journey.title': 'From one vision to two specialized divisions.',
+      'journey.intro': 'TALA Digital Media was established with a clear vision — to create a unified creative platform that delivers innovative, high-quality, and purpose-driven media solutions in Doha, Qatar. What began as a passion for storytelling, production, music, and visual arts has grown into a dynamic creative hub that brings together specialized divisions dedicated to different fields of the industry.',
+      'journey.sinagName': 'Sinag Productions',
+      'journey.sinagBody': 'Through Sinag Productions, we advanced into professional photo, video, and multimedia content creation.',
+      'journey.yamarName': 'Yamar Muzik Studio',
+      'journey.yamarBody': 'With Yamar Muzik Studio, we expanded into music production and audio engineering, providing artists and events with refined and powerful sound.',
+      'journey.closing': 'As the industry continues to evolve, TALA Digital Media remains committed to innovation, technical excellence, and creative collaboration. Our journey is defined by our dedication to delivering seamless execution, building lasting partnerships, and transforming ideas into meaningful and impactful experiences for our clients and the wider community.',
       'team.eyebrow': 'The people behind it',
       'team.title': 'Behind TALA Digital Media Advertising & Events.',
       'team.sub': 'A small, senior team that plans, shoots, and delivers every project in-house.',
       'team.founderRole': 'Founder & Creative Director',
-      'team.role1Title': 'Creative Direction',
-      'team.role1Body': 'Concept, storyboarding, and the creative thread that ties every shoot together.',
-      'team.role2Title': 'Production & Videography',
-      'team.role2Body': 'Multi-camera coverage, lighting, and on-site direction from call time to wrap.',
-      'team.role3Title': 'Photography & Content',
-      'team.role3Body': 'Stills, social content, and same-day edits built for fast-moving events.',
-      'team.role4Title': 'Events Coordination',
-      'team.role4Body': 'Logistics, scheduling, and the client-facing point of contact on every project.',
+      'team.role1Title': 'Head of Creatives, Multimedia & Director of Photography (DOP)',
+      'team.role2Title': 'Head of Audio Engineering',
+      'team.role3Name': 'Team Member',
+      'team.role3Title': 'Stage Manager & Assistant Director of Photography (Assistant DOP)',
+      'team.role4Title': 'Social Media Manager',
+      'team.role5Title': 'Events Coordinator & Administrative Secretary',
+      'team.ctaText': 'Want to work with us on your next project?',
+      'team.ctaBtn': 'Get in touch',
       'work.eyebrow': 'Selected work',
       'work.title': 'A few frames from the field.',
       'work.sub': 'Recent coverage and production work — tap any reel to play.',
@@ -225,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'form.messagePh': "Timeline, budget range, what you're trying to achieve...",
       'form.messageErr': 'Give us a few details (10+ characters).',
       'form.submit': 'Send inquiry',
-      'form.note': 'Sends straight to our inbox — no email app needed on your end.',
+      'form.note': 'Sends straight to our inbox and opens WhatsApp with your message ready to send — quick and direct.',
       'location.eyebrow': 'Visit the studio',
       'location.title': 'Find us in Doha.',
       'location.sub': 'Address, studio hours, and a ride there — all in one place.',
@@ -285,18 +293,26 @@ document.addEventListener('DOMContentLoaded', () => {
       'about.pillar2Body': 'تنفيذ متكامل — محتوى وتغطية وإعلام بدقة تقنية عالية.',
       'about.pillar3Title': 'الشراكة',
       'about.pillar3Body': 'تعاون موثوق وقائم على النتائج يدوم لما بعد المشروع الواحد.',
+      'journey.eyebrow': 'رحلتنا',
+      'journey.title': 'من رؤية واحدة إلى قسمين متخصصين.',
+      'journey.intro': 'تأسست تالا للإعلام الرقمي برؤية واضحة — إنشاء منصة إبداعية موحّدة تقدّم حلولاً إعلامية مبتكرة وعالية الجودة وهادفة في الدوحة، قطر. وما بدأ كشغف بسرد القصص والإنتاج والموسيقى والفنون البصرية، تطوّر إلى مركز إبداعي ديناميكي يجمع أقساماً متخصصة مكرّسة لمجالات مختلفة من الصناعة.',
+      'journey.sinagName': 'سيناغ للإنتاج',
+      'journey.sinagBody': 'من خلال سيناغ للإنتاج، تقدّمنا في إنتاج المحتوى الفوتوغرافي والفيديو والوسائط المتعددة الاحترافي.',
+      'journey.yamarName': 'استوديو يامار ميوزيك',
+      'journey.yamarBody': 'مع استوديو يامار ميوزيك، توسّعنا في إنتاج الموسيقى وهندسة الصوت، لنوفر للفنانين والفعاليات صوتاً نقياً وقوياً.',
+      'journey.closing': 'مع استمرار تطوّر الصناعة، تبقى تالا للإعلام الرقمي ملتزمة بالابتكار والتميّز التقني والتعاون الإبداعي. تتحدد رحلتنا بالتزامنا بتنفيذ سلس، وبناء شراكات دائمة، وتحويل الأفكار إلى تجارب هادفة ومؤثرة لعملائنا والمجتمع الأوسع.',
       'team.eyebrow': 'الفريق وراء العمل',
       'team.title': 'خلف تالا للإعلام الرقمي والدعاية والفعاليات.',
       'team.sub': 'فريق صغير ومتمرّس يخطط وينفّذ ويسلّم كل مشروع داخلياً.',
       'team.founderRole': 'المؤسس والمدير الإبداعي',
-      'team.role1Title': 'الإخراج الإبداعي',
-      'team.role1Body': 'الفكرة، اللوحة القصصية، والخيط الإبداعي الذي يربط كل تصوير.',
-      'team.role2Title': 'الإنتاج والتصوير المرئي',
-      'team.role2Body': 'تغطية متعددة الكاميرات، الإضاءة، والإخراج الميداني من البداية حتى الختام.',
-      'team.role3Title': 'التصوير الفوتوغرافي والمحتوى',
-      'team.role3Body': 'صور ثابتة، محتوى للتواصل الاجتماعي، ومونتاج سريع للفعاليات.',
-      'team.role4Title': 'تنسيق الفعاليات',
-      'team.role4Body': 'اللوجستيات، الجدولة، ونقطة التواصل مع العميل في كل مشروع.',
+      'team.role1Title': 'رئيس الإبداع والوسائط المتعددة ومدير التصوير (DOP)',
+      'team.role2Title': 'رئيس هندسة الصوت',
+      'team.role3Name': 'عضو الفريق',
+      'team.role3Title': 'مدير المسرح ومساعد مدير التصوير (Assistant DOP)',
+      'team.role4Title': 'مدير التواصل الاجتماعي',
+      'team.role5Title': 'منسقة الفعاليات والسكرتيرة الإدارية',
+      'team.ctaText': 'هل تريد العمل معنا في مشروعك القادم؟',
+      'team.ctaBtn': 'تواصل معنا',
       'work.eyebrow': 'أعمال مختارة',
       'work.title': 'لقطات من الميدان.',
       'work.sub': 'تغطيات وأعمال إنتاج حديثة — اضغط على أي مقطع لتشغيله.',
@@ -355,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'form.messagePh': 'الجدول الزمني، الميزانية التقريبية، وما تسعون لتحقيقه...',
       'form.messageErr': 'يرجى إضافة بعض التفاصيل (10 أحرف على الأقل).',
       'form.submit': 'إرسال الطلب',
-      'form.note': 'يصل مباشرة إلى بريدنا — لا حاجة لفتح تطبيق البريد لديكم.',
+      'form.note': 'يصل مباشرة إلى بريدنا، ويفتح واتساب برسالتكم جاهزة للإرسال — سريع ومباشر.',
       'location.eyebrow': 'زوروا الاستوديو',
       'location.title': 'موقعنا في الدوحة.',
       'location.sub': 'العنوان، أوقات العمل، ورحلة إلينا — كل ذلك في مكان واحد.',
@@ -592,6 +608,17 @@ document.addEventListener('DOMContentLoaded', () => {
       field.addEventListener('change', () => clearError(field));
     });
 
+    function buildWhatsAppUrl() {
+      const summary =
+`New inquiry via website:
+Name: ${fields.name.value.trim()}
+Email: ${fields.email.value.trim()}
+Phone: ${fields.phone.value.trim() || 'Not provided'}
+Service: ${fields.service.value}
+Message: ${fields.message.value.trim()}`;
+      return `https://wa.me/97433043148?text=${encodeURIComponent(summary)}`;
+    }
+
     function mailtoFallback() {
       const subject = `New project inquiry — ${fields.service.value}`;
       const body =
@@ -621,6 +648,12 @@ ${fields.message.value.trim()}`;
         return;
       }
 
+      // Open WhatsApp with the inquiry pre-filled, synchronously and before
+      // any await — browsers can block window.open() once the original
+      // click's "user activation" expires across an async gap, so this has
+      // to fire immediately inside the submit handler, not after the fetch.
+      window.open(buildWhatsAppUrl(), '_blank', 'noopener');
+
       setSubmitting(true);
       statusBox.className = 'form-status';
 
@@ -632,7 +665,7 @@ ${fields.message.value.trim()}`;
         });
 
         if (response.ok) {
-          statusBox.textContent = "Thanks — your message is on its way. We'll be in touch shortly.";
+          statusBox.textContent = "Thanks — your message is on its way, and we've opened WhatsApp so you can send it there too.";
           statusBox.className = 'form-status show ok';
           form.reset();
         } else {
@@ -642,7 +675,7 @@ ${fields.message.value.trim()}`;
         // Network or endpoint failure — fall back to mailto so the
         // client's message still reaches us either way.
         mailtoFallback();
-        statusBox.textContent = "Couldn't send automatically, so we opened your email app instead.";
+        statusBox.textContent = "Couldn't send the email automatically, so we opened your email app — and WhatsApp is ready in the other tab.";
         statusBox.className = 'form-status show err';
       } finally {
         setSubmitting(false);

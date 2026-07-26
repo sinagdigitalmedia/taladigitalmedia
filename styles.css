@@ -473,12 +473,7 @@ h1.hero-title em{
   transition:border-color .3s ease, transform .3s ease;
 }
 .ride-btn:hover{border-color:var(--sand); transform:translateX(4px);}
-.ride-logo{
-  flex-shrink:0; width:56px; height:36px; border-radius:6px; background:#000;
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--body); font-weight:700; font-size:.86rem; color:#fff; letter-spacing:-.01em;
-}
-.ride-logo-img{flex-shrink:0; width:56px; height:36px; object-fit:cover; border-radius:6px;}
+.ride-logo-img{flex-shrink:0; width:56px; height:36px; object-fit:cover; border-radius:6px; background:#0a0a0a;}
 .ride-name{display:block; font-family:var(--display); font-weight:600; font-size:1rem;}
 .ride-sub{display:block; font-family:var(--mono); font-size:.72rem; color:rgba(243,237,225,0.55); margin-top:3px;}
 
@@ -573,11 +568,14 @@ footer .fmark{font-family:var(--display); font-weight:600; color:var(--off-white
   .about-sticky{position:static;}
   .pillar{padding-right:0 !important; border-right:none !important;}
 
+  .journey{padding:90px 18px;}
+  .division-card{padding:26px 22px;}
+
   .work{padding:90px 18px;}
   .work-grid{grid-template-columns:1fr;}
 
   .team{padding:90px 18px;}
-  .team-card--founder{padding:26px 22px;}
+  .team-card{padding:22px 20px;}
 
   .contact{padding:90px 18px;}
   .form-panel{padding:24px;}
@@ -617,8 +615,8 @@ footer .fmark{font-family:var(--display); font-weight:600; color:var(--off-white
 }
 .float-btn img{width:60%; height:60%; object-fit:contain; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25));}
 
-.float-uber{background:#000;}
-.float-label{font-family:var(--display); font-weight:700; font-size:1.35rem; color:#fff; line-height:1;}
+.float-uber{background:#000; overflow:hidden;}
+.float-uber-img{width:100% !important; height:100% !important; object-fit:cover !important; border-radius:50%; filter:none !important;}
 
 .float-badrgo{background:#fff; overflow:hidden;}
 .float-badrgo img{width:72%; height:72%; object-fit:contain;}
@@ -693,6 +691,34 @@ html[dir="rtl"] .map-open{direction:ltr; display:inline-block;}
   html[dir="rtl"] .float-stack{left:14px; right:auto;}
 }
 
+/* ---------- OUR JOURNEY ---------- */
+.journey{
+  padding:140px clamp(20px,5vw,64px);
+  background:linear-gradient(180deg, var(--charcoal-2) 0%, var(--charcoal) 100%);
+  border-top:1px solid var(--line);
+}
+.journey-head{max-width:70ch;}
+.journey-title{
+  font-family:var(--display); font-weight:600; font-size:clamp(2.1rem,4vw,3.2rem); margin-top:18px; line-height:1.1;
+}
+.journey-intro{
+  margin-top:24px; font-size:1.05rem; line-height:1.9; color:rgba(243,237,225,0.78); font-weight:300; max-width:68ch;
+}
+
+.journey-divisions{
+  margin-top:56px; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1px;
+  background:var(--line); border:1px solid var(--line);
+}
+.division-card{background:var(--charcoal); padding:34px 30px;}
+.division-num{font-family:var(--mono); color:var(--sand); font-size:.8rem; letter-spacing:.1em; margin-bottom:14px;}
+.division-card h3{font-family:var(--display); font-weight:600; font-size:1.35rem; margin-bottom:12px;}
+.division-card p{font-size:.96rem; line-height:1.75; color:rgba(243,237,225,0.72); font-weight:300;}
+
+.journey-closing{
+  margin-top:44px; font-size:1.02rem; line-height:1.9; color:rgba(243,237,225,0.68); font-weight:300; max-width:70ch;
+  padding-top:32px; border-top:1px solid var(--line);
+}
+
 /* ---------- TEAM ---------- */
 .team{
   padding:140px clamp(20px,5vw,64px);
@@ -706,27 +732,26 @@ html[dir="rtl"] .map-open{direction:ltr; display:inline-block;}
 .team-sub{margin-top:16px; color:rgba(243,237,225,0.65); font-weight:300; line-height:1.7; font-size:1.02rem;}
 
 .team-grid{
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:1px;
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1px;
   background:var(--line); border:1px solid var(--line);
 }
 .team-card{
-  background:var(--charcoal-2); padding:30px 26px; display:flex; flex-direction:column; gap:16px;
+  background:var(--charcoal-2); padding:26px 24px; display:flex; align-items:center; gap:18px;
 }
-.team-card--founder{
-  grid-column:span 2; flex-direction:row; align-items:center; gap:22px;
-}
-@media(max-width:700px){ .team-card--founder{grid-column:span 1; flex-direction:column; align-items:flex-start; text-align:left;} }
 
 .team-photo{
   width:76px; height:76px; border-radius:50%; object-fit:cover; border:1px solid var(--sand); filter:grayscale(.35); flex-shrink:0;
 }
-.team-avatar{
-  width:52px; height:52px; border-radius:50%; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(140deg, var(--sand) 0%, var(--maroon) 130%);
-  color:var(--charcoal); font-family:var(--display); font-weight:700; font-size:.95rem; letter-spacing:.02em;
-}
-.team-meta h3{font-family:var(--display); font-weight:600; font-size:1.12rem; margin-bottom:6px;}
+.team-meta h3{font-family:var(--display); font-weight:600; font-size:1.05rem; margin-bottom:6px; line-height:1.25;}
 .team-meta p{font-size:.88rem; color:rgba(243,237,225,0.62); line-height:1.6; font-weight:300; margin:0;}
-.team-role{font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--sand);}
+.team-role{font-family:var(--mono); font-size:.7rem; letter-spacing:.04em; text-transform:uppercase; color:var(--sand); line-height:1.5; display:inline-block;}
+
+.team-cta{
+  margin-top:56px; padding-top:40px; border-top:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+}
+.team-cta p{font-family:var(--display); font-size:1.3rem; font-weight:500; color:rgba(243,237,225,0.9);}
+
+nav.links a.active-link{opacity:1; color:var(--sand-light);}
+nav.links a.active-link::after{width:100%;}
 

@@ -3,7 +3,8 @@ TALA DIGITAL MEDIA ADVERTISING & EVENTS — WEBSITE
 
 FOLDER STRUCTURE
 ----------------
-index.html      Page markup
+index.html      Home page markup
+team.html        Team page markup (shares styles.css / script.js with index.html)
 styles.css       All styling
 script.js        Interactivity (nav, scroll reveals, contact form, video controls)
 README.txt       This file
@@ -11,9 +12,11 @@ assets/
   tala-logo.png       Official logo (nav + hero watermark)
   mon-sarmiento.webp  Founder photo
   whatsapp-icon.png   WhatsApp brand icon (floating button + contact list)
-  badrgo-icon.png     BadrGo brand icon (ride booking button)
+  uber-icon.png       Uber brand icon (floating button + ride booking)
+  badrgo-icon.png     BadrGo brand icon (floating button + ride booking)
   instagram-icon.png  Instagram brand icon (available if you want to swap
                        it in for the current inline SVG version)
+  team/               Cropped photos for the six people on the Team page
   posters/            Thumbnail frame for each showreel video
   videos/             Compressed, web-ready MP4s shown in the "Work" section
 
@@ -77,12 +80,23 @@ KEY EDIT POINTS
   new block (e.g. `fr: { ... }`) with the same keys and a matching button
   in the header's `.lang-switch`.
 
-CONTACT FORM — SENDS STRAIGHT TO YOUR INBOX (NO SIGNUP NEEDED)
+CONTACT FORM — SENDS TO EMAIL *AND* OPENS WHATSAPP
 -------------------------------------------------------------------
-The form is already wired up to deliver straight to
-taladigitalmedia@gmail.com using a free service called FormSubmit — no
-account, no API key, nothing to register. There's exactly ONE thing you
-need to do, and only once, ever:
+Submitting the form now does two things at once:
+
+  1. Sends the inquiry to taladigitalmedia@gmail.com via FormSubmit (see
+     activation steps below — one-time setup).
+  2. Opens a new tab with WhatsApp pre-filled with the same inquiry,
+     addressed to +974 3304 3148 (wa.me/97433043148). The client still
+     needs to tap "Send" once inside WhatsApp — there's no way for a
+     plain website to silently deliver a WhatsApp message on someone's
+     behalf without WhatsApp's official Business API (which needs a paid
+     Meta Business account and a server, not just a static site). This is
+     the closest thing to instant that's possible without that
+     infrastructure — it removes typing for the client entirely, they
+     just confirm and hit send.
+
+FormSubmit setup — no account, no API key, ONE thing to do, once ever:
 
   1. Deploy the site (or open index.html locally) and submit the contact
      form yourself one time, with any test details.
@@ -92,7 +106,8 @@ need to do, and only once, ever:
   3. That's it — activation is permanent. From that point on, every real
      submission from a client arrives directly in the inbox automatically,
      and they see "your message is on its way" right on the page with
-     nothing extra to click on their end.
+     nothing extra to click on their end (aside from confirming the
+     WhatsApp tab that opens alongside it).
 
 Until that one-time activation happens, FormSubmit will silently hold the
 very first submission back (that's the "please activate" step) — so do the
@@ -104,9 +119,10 @@ uploads, etc.) instead of plain emails, formsubmit.co also offers a free
 account with the same email — see https://formsubmit.co for details, but
 it's optional; the current setup already delivers to your inbox on its own.
 
-Fallback: if a client's browser blocks the request (ad blocker, offline,
-etc.), the form automatically falls back to opening their own email app
-addressed to taladigitalmedia@gmail.com, so no inquiry is ever lost.
+Fallback: if a client's browser blocks the email request (ad blocker,
+offline, etc.), the form automatically falls back to opening their own
+email app addressed to taladigitalmedia@gmail.com, so no inquiry is ever
+lost — the WhatsApp tab still opens either way.
 
 MOBILE
 ------
@@ -116,16 +132,40 @@ card tilt, hero parallax) are automatically switched
 off on touch devices — they add polish on desktop without weighing down or
 cluttering the mobile experience.
 
-TEAM SECTION
-------------
-The #team section (index.html) features the founder (real photo, name, and
-role) alongside four role-based cards — Creative Direction, Production &
-Videography, Photography & Content, and Events Coordination — each with an
-initials avatar instead of a stock photo, since no other real team photos
-were provided. To add real people later: duplicate one .team-card block,
-swap the initials avatar for a <img class="team-photo"> like the founder's,
-and add their name/role. All the card copy is translatable — see the
-`team.*` keys in script.js's `translations` object.
+TEAM PAGE
+---------
+Team is now its own page — team.html — instead of a section on the home
+page, linked from the "Team" item in every page's nav. It shares the same
+header, footer, floating Uber/BadrGo/WhatsApp buttons, and language
+switcher as index.html (all driven by the same script.js and styles.css),
+so it feels like part of the same site rather than a separate build.
+
+Six real people are featured, each with a photo, name, and role:
+  - Mon Sarmiento — Founder & Creative Director
+  - Drew Dhiren Nolasco — Head of Creatives, Multimedia & Director of
+    Photography (DOP)
+  - Ryan Benedick Yamar — Head of Audio Engineering
+  - "Team Member" (name not yet provided) — Stage Manager & Assistant
+    Director of Photography. This one needs a real name — find the
+    `data-i18n="team.role3Name"` span in team.html (or the
+    `team.role3Name` key in script.js's `translations` object) and replace
+    "Team Member" with their actual name in both the `en` and `ar` blocks.
+  - Juliana Sofia Angeline Usac Flores — Social Media Manager
+  - Jonalyn F. Barte — Events Coordinator & Administrative Secretary
+
+Photos are cropped/resized copies in assets/team/. To add or swap someone:
+duplicate one .team-card block in team.html, point the <img> at a new file
+in assets/team/, and update the name/role. Role text is translatable via
+the `team.*` keys in script.js; names are treated as proper nouns and left
+untranslated (same pattern as the founder's).
+
+OUR JOURNEY
+-----------
+The #journey section (on index.html, between About and Work) carries the
+"our journey" company story you provided — founding vision, then the two
+divisions (Sinag Productions and Yamar Muzik Studio) as side-by-side
+cards, then the closing statement. All of it is translatable via the
+`journey.*` keys in script.js.
 
 STUDIO HOURS
 ------------
@@ -158,7 +198,8 @@ RIDE BOOKING (UBER & BADRGO)
 ------------------------------
 Uber and BadrGo buttons appear in two places — the floating stack in the
 bottom-right corner (every page) and inline under the studio hours in the
-Location section:
+Location section. Both use the official brand logos you provided
+(assets/uber-icon.png and assets/badrgo-icon.png).
 
 - UBER opens the Uber app (or uber.com on desktop) with the dropoff
   address already filled in as "Building No 30, Street 138, Zone 6, Doha,
@@ -178,13 +219,20 @@ BEFORE YOU GO LIVE — QUICK CHECKLIST
 --------------------------------------
 [ ] Submit the contact form once yourself so FormSubmit sends its one-time
     activation email to taladigitalmedia@gmail.com — click the link in it.
+    (This same test will also pop open a WhatsApp tab — that's expected.)
 [ ] Confirm the WhatsApp number (+974 3304 3148) and email address are
     correct throughout.
 [ ] Double-check the Google Maps pin under #location opens the right spot.
 [ ] Test both Uber buttons (floating + Location section) open with the
     right dropoff address.
-[ ] Skim the Team section — swap in real photos/names whenever you have them.
+[ ] Add the missing name for the Stage Manager & Assistant DOP on the
+    Team page — currently shows "Team Member" as a placeholder (see
+    TEAM PAGE above for exactly where to edit it).
+[ ] Give the Our Journey copy a read-through — it's your text as provided,
+    just confirm it reads the way you want before it's public.
 [ ] Confirm the studio hours in script.js match what you actually want live.
+[ ] Click "Team" in the nav from both index.html and team.html to make
+    sure the two pages link to each other correctly once deployed.
 [ ] Test the EN / AR language toggle and the mobile menu on an actual phone.
 
 BROWSER SUPPORT
