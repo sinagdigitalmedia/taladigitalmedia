@@ -48,7 +48,11 @@ KEY EDIT POINTS
   for one .work-card, swap the poster/video paths and title/description.
   Videos were re-encoded to 720px-wide H.264 (~4-10MB each) so the repo stays
   git-friendly — swap in the original masters yourself if you need full
-  resolution somewhere other than the website.
+  resolution somewhere other than the website. The play button on each
+  thumbnail is a pure CSS triangle (.play-btn::after in styles.css) rather
+  than a text/emoji character, so it renders identically and cleanly
+  across every OS and browser instead of varying with each platform's
+  emoji font.
 - 3D touches: mouse-tilt on cards (mission/vision, pillars, team, the
   contact form panel) is driven by [data-tilt] attributes in index.html and
   the tilt/parallax logic in script.js. It's deliberately left off the Work
@@ -140,18 +144,25 @@ header, footer, floating Uber/BadrGo/WhatsApp buttons, and language
 switcher as index.html (all driven by the same script.js and styles.css),
 so it feels like part of the same site rather than a separate build.
 
-Six real people are featured, each with a photo, name, and role:
-  - Mon Sarmiento — Founder & Creative Director
+Seven real people are featured:
+  - Mon Sarmiento — Founder & Creative Director (photo)
   - Drew Dhiren Nolasco — Head of Creatives, Multimedia & Director of
-    Photography (DOP)
-  - Ryan Benedick Yamar — Head of Audio Engineering
-  - "Team Member" (name not yet provided) — Stage Manager & Assistant
-    Director of Photography. This one needs a real name — find the
-    `data-i18n="team.role3Name"` span in team.html (or the
-    `team.role3Name` key in script.js's `translations` object) and replace
-    "Team Member" with their actual name in both the `en` and `ar` blocks.
-  - Juliana Sofia Angeline Usac Flores — Social Media Manager
+    Photography (DOP) (photo)
+  - Ryan Benedick Yamar — Head of Audio Engineering (photo)
+  - Anjo Canicosa — Stage Manager (photo)
+  - Angel Flores — Content Creation & Assistant Director of Photography
+    (Assistant DOP). No photo was provided for Angel yet, so this card
+    shows a monogram avatar ("AF" on a gradient circle, matching the
+    site's palette) instead of a photo — same visual treatment used for
+    the founder pillars elsewhere on the site, so it still looks
+    intentional and professional rather than like a placeholder. Swap in
+    a real photo any time: replace the `<div class="team-avatar">AF</div>`
+    block in team.html with `<img src="assets/team/angel-flores.jpg"
+    class="team-photo">` once you have one, and drop the photo into
+    assets/team/.
+  - Juliana Sofia Angeline Usac Flores — Social Media Manager (photo)
   - Jonalyn F. Barte — Events Coordinator & Administrative Secretary
+    (photo)
 
 Photos are cropped/resized copies in assets/team/. To add or swap someone:
 duplicate one .team-card block in team.html, point the <img> at a new file
@@ -196,24 +207,43 @@ automatically using the `hours.*` and `day.*` keys already in the
 
 RIDE BOOKING (UBER & BADRGO)
 ------------------------------
-Uber and BadrGo buttons appear in two places — the floating stack in the
-bottom-right corner (every page) and inline under the studio hours in the
-Location section. Both use the official brand logos you provided
-(assets/uber-icon.png and assets/badrgo-icon.png).
+Uber and BadrGo buttons appear in three places — the floating stack in the
+bottom-right corner (every page, including team.html) and inline under the
+studio hours in the Location section. Both use the official brand logos
+you provided (assets/uber-icon.png and assets/badrgo-icon.png).
 
-- UBER opens the Uber app (or uber.com on desktop) with the dropoff
-  address already filled in as "Building No 30, Street 138, Zone 6, Doha,
-  Qatar" — the client only needs to confirm their pickup point. This uses
-  Uber's official, documented deep-link format, so it's reliable.
+- UBER opens the Uber app (or uber.com on desktop) with the dropoff set
+  to exact coordinates (25.2862122, 51.5359695 — pulled from your Google
+  Maps pin) plus a nickname label "TALA Digital Media Advertising &
+  Events". The link only passes latitude/longitude now — an earlier
+  version also passed a formatted_address alongside the coordinates,
+  which made some versions of the Uber app treat the destination as a
+  text search (showing an editable field + a suggestion to tap) instead
+  of dropping straight onto the pin. Coordinates-only is the more direct
+  method. Be aware, though: Uber's public web/app link format does not
+  offer a way to guarantee a fully "zero-tap" destination on every device
+  and app version — that level of control only exists through Uber's
+  Business API, which needs a paid partner account and backend, not
+  something a static website can do on its own. What's here is the most
+  direct experience the public link format supports. All three Uber links
+  (floating buttons on both pages + the inline Location button) point to
+  the same coordinates — update the `dropoff[latitude]` /
+  `dropoff[longitude]` values in all three spots if the studio ever moves.
 - BADRGO opens the app via its official smart link (onelink.to/badrgo) —
   installs it if it's not already on the client's phone, opens it directly
   if it is. Unlike Uber, BadrGo (a Qatari-only app) doesn't publish a
   public API for pre-filling a destination, so the client will need to
-  type or search the address themselves once the app opens. If BadrGo
-  releases a destination-prefill link in the future, swap the href on the
-  ".ride-badrgo" link in index.html — there are two, one in the floating
+  type or search the address themselves once the app opens — this is a
+  limitation of BadrGo itself, not something fixable from the website
+  side. If BadrGo releases a destination-prefill link in the future, swap
+  the href on the ".ride-badrgo" link — there are two, one in the floating
   stack ("float-badrgo") and one inline in Location ("ride-badrgo"), both
   currently pointing to the same onelink.to/badrgo URL.
+
+The map embed and the "Open in Google Maps" link in the Location section
+were also updated to the exact pin you shared
+(maps.app.goo.gl/7puvrBPLFeUCGzJm7), so all three — map, Uber, and the
+"Open in Google Maps" link — now point to the same precise spot.
 
 BEFORE YOU GO LIVE — QUICK CHECKLIST
 --------------------------------------
@@ -223,11 +253,11 @@ BEFORE YOU GO LIVE — QUICK CHECKLIST
 [ ] Confirm the WhatsApp number (+974 3304 3148) and email address are
     correct throughout.
 [ ] Double-check the Google Maps pin under #location opens the right spot.
-[ ] Test both Uber buttons (floating + Location section) open with the
-    right dropoff address.
-[ ] Add the missing name for the Stage Manager & Assistant DOP on the
-    Team page — currently shows "Team Member" as a placeholder (see
-    TEAM PAGE above for exactly where to edit it).
+[ ] Test all three Uber buttons open directly on the pin without extra
+    typing required (should land on a confirm screen, not a search box).
+[ ] Send over a real photo for Angel Flores when you have one — currently
+    showing an "AF" monogram avatar on the Team page (see TEAM PAGE above
+    for exactly where to swap it in).
 [ ] Give the Our Journey copy a read-through — it's your text as provided,
     just confirm it reads the way you want before it's public.
 [ ] Confirm the studio hours in script.js match what you actually want live.
