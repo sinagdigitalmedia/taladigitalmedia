@@ -217,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'work.card3Body': 'Multi-camera coverage of a live collaborative session.',
       'work.card4Title': 'Sinag Fashion Camp — Year 2',
       'work.card4Body': 'Full event recap: styling, runway, and behind-the-scenes.',
+      'work.swipeHint': 'Swipe to see more',
       'hours.eyebrow': 'Studio hours',
       'hours.title': "When we're around.",
       'hours.sub': 'Doha time — reach out or plan your visit around these hours.',
@@ -382,6 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'work.card3Body': 'تغطية متعددة الكاميرات لجلسة تعاونية حية.',
       'work.card4Title': 'معسكر سيناغ للأزياء — السنة الثانية',
       'work.card4Body': 'ملخص كامل للفعالية: التنسيق، عرض الأزياء، وخلف الكواليس.',
+      'work.swipeHint': 'مرر لرؤية المزيد',
       'hours.eyebrow': 'أوقات العمل',
       'hours.title': 'أوقات تواجدنا.',
       'hours.sub': 'بتوقيت الدوحة — تواصلوا معنا أو خططوا لزيارتكم ضمن هذه الأوقات.',
@@ -503,6 +505,19 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
+  }
+
+  /* ---------- scroll progress bar ---------- */
+  const progressBar = document.getElementById('scrollProgress');
+  if (progressBar) {
+    const updateProgress = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      progressBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
   }
 
   /* ---------- cursor spotlight ---------- */

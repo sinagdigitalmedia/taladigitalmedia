@@ -347,6 +347,25 @@ DESIGN NOTES
   dot positions are just percentage coordinates in the radial-gradient
   list, and opacity/animation-duration control how bright and how fast
   it twinkles.
+- Scroll progress bar: a thin gold-to-maroon line at the very top of the
+  viewport (every page) that fills in as the visitor scrolls down —
+  driven by the "scroll progress bar" block in script.js. Purely visual,
+  respects reduced-motion.
+- Work section on mobile — "reels" carousel: below ~600px wide, the Work
+  section's video grid switches from a stacked list to a horizontal,
+  swipeable, snap-scrolling carousel (one video mostly in view, the next
+  peeking in from the edge) — closer to how people actually browse short
+  vertical video elsewhere, and it fits the "reels" framing of that
+  section. A small animated "swipe to see more" hint appears underneath
+  on mobile only. Desktop is unaffected — still the original grid. Look
+  for ".work-grid" inside the "@media(max-width:600px)" block in
+  styles.css to adjust card width or remove the effect.
+- General mobile pass: tightened header/logo/nav spacing at very narrow
+  widths (~360px and under, e.g. iPhone SE) so the logo, language
+  switcher, and menu button never crowd each other; confirmed every
+  interactive element (buttons, nav links, social icons) meets a
+  comfortable tap-target size on touch devices; verified no element
+  causes horizontal page scroll on small screens.
 
 BROWSER SUPPORT
 ----------------
