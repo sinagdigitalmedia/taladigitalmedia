@@ -84,44 +84,55 @@ KEY EDIT POINTS
   new block (e.g. `fr: { ... }`) with the same keys and a matching button
   in the header's `.lang-switch`.
 
-CONTACT FORM — SENDS TO EMAIL *AND* OPENS WHATSAPP
+CONTACT FORM — CLIENT CHOOSES EMAIL OR WHATSAPP
 -------------------------------------------------------------------
-Submitting the form now does two things at once:
+The form has two buttons instead of one — "Send via Email" and "Send via
+WhatsApp" — so the client picks whichever they'd rather use. Both are
+right there side by side; nothing opens automatically without the client
+choosing it.
 
-  1. Sends the inquiry to taladigitalmedia@gmail.com via FormSubmit (see
-     activation steps below — one-time setup).
-  2. Opens a new tab with WhatsApp pre-filled with the same inquiry,
-     addressed to +974 3304 3148 (wa.me/97433043148). The client still
-     needs to tap "Send" once inside WhatsApp — there's no way for a
-     plain website to silently deliver a WhatsApp message on someone's
-     behalf without WhatsApp's official Business API (which needs a paid
-     Meta Business account and a server, not just a static site). This is
-     the closest thing to instant that's possible without that
-     infrastructure — it removes typing for the client entirely, they
-     just confirm and hit send.
+- SEND VIA EMAIL validates the fields, then delivers straight to
+  taladigitalmedia@gmail.com via FormSubmit (confirmed already activated
+  on your end) — the client sees "your message is on its way" on the page
+  itself, nothing else to do.
+- SEND VIA WHATSAPP validates the fields, then opens a new tab with
+  WhatsApp pre-filled with the same inquiry, addressed to
+  +974 3304 3148 (wa.me/97433043148). The client still needs to tap
+  "Send" once inside WhatsApp — there's no way for a plain website to
+  silently deliver a WhatsApp message on someone's behalf without
+  WhatsApp's official Business API (which needs a paid Meta Business
+  account and a server, not just a static site). This is the closest
+  thing to instant that's possible without that infrastructure — it
+  removes typing for the client entirely, they just confirm and hit send.
+- Pressing Enter inside any text field defaults to the email path (same
+  as clicking "Send via Email"), so keyboard users get sensible behavior
+  even without touching a button.
 
-FormSubmit setup — no account, no API key, ONE thing to do, once ever:
+FormSubmit — already active on your end:
 
-  1. Deploy the site (or open index.html locally) and submit the contact
-     form yourself one time, with any test details.
-  2. FormSubmit will send an email to taladigitalmedia@gmail.com titled
-     something like "Please Activate FormSubmit.co". Open it and click the
-     activation link inside.
-  3. That's it — activation is permanent. From that point on, every real
-     submission from a client arrives directly in the inbox automatically,
-     and they see "your message is on its way" right on the page with
-     nothing extra to click on their end (aside from confirming the
-     WhatsApp tab that opens alongside it).
-
-Until that one-time activation happens, FormSubmit will silently hold the
-very first submission back (that's the "please activate" step) — so do the
-test submission yourself before sharing the site with clients, not the
-other way around.
+  You mentioned FormSubmit is already activated for
+  taladigitalmedia@gmail.com, so "Send via Email" should work immediately
+  with no further setup. If you ever reconnect the form to a different
+  inbox, the one-time step is: submit the form once yourself, open the
+  "Please Activate FormSubmit.co" email FormSubmit sends, and click the
+  activation link — after that, submissions arrive automatically forever.
 
 If you ever want a nicer submissions dashboard (spam filtering, file
 uploads, etc.) instead of plain emails, formsubmit.co also offers a free
 account with the same email — see https://formsubmit.co for details, but
 it's optional; the current setup already delivers to your inbox on its own.
+
+"EMAIL US" LINKS NOW GO TO THE FORM, NOT THE EMAIL APP
+---------------------------------------------------------
+Previously, the "Email us" button in the nav and the email address shown
+in the Contact section both opened the visitor's own email app (a mailto
+link). Both now scroll straight down to the contact form instead:
+  - The nav "Email us" button links to #contact (or index.html#contact
+    from team.html).
+  - The email address shown under "Email us" in the Contact section links
+    to #inquiryForm, landing right on the form.
+Nothing on the page triggers mailto: anymore — every path leads to the
+form, where the client picks Email or WhatsApp themselves.
 
 Fallback: if a client's browser blocks the email request (ad blocker,
 offline, etc.), the form automatically falls back to opening their own
@@ -173,6 +184,17 @@ The #journey section (on index.html, between About and Work) carries the
 divisions (Sinag Events and Yamar Muzik Studio) as side-by-side
 cards, then the closing statement. All of it is translatable via the
 `journey.*` keys in script.js.
+
+STUDIO RENTALS
+--------------
+A dedicated callout — #rentals, between Our Journey and Work — introduces
+studio rentals as its own offering rather than burying it in a dropdown.
+It's a single minimal card: a short line about renting the space by the
+hour or day, and a button that scrolls straight to the contact form.
+"Studio Rentals" was also added to the scrolling filmstrip ticker up near
+the hero, and it's already selectable as a service in the contact form's
+dropdown ("Studio Rental"). All the copy is translatable via the
+`rentals.*` keys in script.js.
 
 STUDIO HOURS
 ------------
@@ -249,14 +271,24 @@ were also updated to the exact pin you shared
 
 BEFORE YOU GO LIVE — QUICK CHECKLIST
 --------------------------------------
-[ ] Submit the contact form once yourself so FormSubmit sends its one-time
-    activation email to taladigitalmedia@gmail.com — click the link in it.
-    (This same test will also pop open a WhatsApp tab — that's expected.)
+[ ] Test "Send via Email" on the contact form — since FormSubmit is
+    already activated on your end, this should deliver to
+    taladigitalmedia@gmail.com immediately with no extra setup.
+[ ] Test "Send via WhatsApp" on the contact form — confirm it opens a new
+    tab addressed to +974 3304 3148 with the inquiry pre-filled.
+[ ] Click "Email us" in the nav, and the email address under "Email us"
+    in the Contact section — both should scroll to the form now, not
+    open your email app. If either still opens mailto, the browser may
+    be caching an old version of the page; hard-refresh to confirm.
 [ ] Confirm the WhatsApp number (+974 3304 3148) and email address are
     correct throughout.
 [ ] Double-check the Google Maps pin under #location opens the right spot.
 [ ] Test all three Uber buttons open with the full address and land
     close to the pin.
+[ ] Read the new Studio Rentals callout (#rentals, between Our Journey
+    and Work) and confirm the wording matches what you actually offer —
+    hourly/daily rates, minimum booking length, etc. aren't listed yet,
+    so add specifics there if you want them shown.
 [ ] Give the Our Journey copy a read-through — it's your text as provided,
     just confirm it reads the way you want before it's public.
 [ ] Confirm the studio hours in script.js match what you actually want live.

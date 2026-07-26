@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'film.03': 'Media Production',
       'film.04': 'Brand Storytelling',
       'film.05': 'Creative Direction',
+      'film.06': 'Studio Rentals',
       'mv.eyebrow': 'Why we exist',
       'mv.lead1': "Two ideas drive everything TALA builds — ",
       'mv.lead2': "where we're going",
@@ -180,6 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
       'team.role5Title': 'Events Coordinator & Administrative Secretary',
       'team.ctaText': 'Want to work with us on your next project?',
       'team.ctaBtn': 'Get in touch',
+      'rentals.eyebrow': 'Also available',
+      'rentals.title': 'Studio rentals.',
+      'rentals.body': 'Need the space, not the crew? Our fully equipped production and audio studio in Doha is available to rent by the hour or by the day — bring your own team, or work solo.',
+      'rentals.cta': 'Enquire about rentals',
       'work.eyebrow': 'Selected work',
       'work.title': 'A few frames from the field.',
       'work.sub': 'Recent coverage and production work — tap any reel to play.',
@@ -233,12 +238,14 @@ document.addEventListener('DOMContentLoaded', () => {
       'form.opt4': 'Brand Storytelling',
       'form.opt5': 'Creative Direction',
       'form.opt6': 'Something else',
+      'form.opt7': 'Studio Rental',
       'form.serviceErr': 'Select what you need.',
       'form.message': 'Tell us about the project',
       'form.messagePh': "Timeline, budget range, what you're trying to achieve...",
       'form.messageErr': 'Give us a few details (10+ characters).',
-      'form.submit': 'Send inquiry',
-      'form.note': 'Sends straight to our inbox and opens WhatsApp with your message ready to send — quick and direct.',
+      'form.sendEmail': 'Send via Email',
+      'form.sendWhatsapp': 'Send via WhatsApp',
+      'form.note': "Choose how you'd like to reach us — both go straight to the studio.",
       'location.eyebrow': 'Visit the studio',
       'location.title': 'Find us in Doha.',
       'location.sub': 'Address, studio hours, and a ride there — all in one place.',
@@ -275,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'film.03': 'إنتاج إعلامي',
       'film.04': 'سرد العلامة التجارية',
       'film.05': 'إخراج إبداعي',
+      'film.06': 'تأجير الاستوديو',
       'mv.eyebrow': 'لماذا نحن هنا',
       'mv.lead1': 'فكرتان تقودان كل ما تبنيه تالا — ',
       'mv.lead2': 'إلى أين نتجه',
@@ -317,6 +325,10 @@ document.addEventListener('DOMContentLoaded', () => {
       'team.role5Title': 'منسقة الفعاليات والسكرتيرة الإدارية',
       'team.ctaText': 'هل تريد العمل معنا في مشروعك القادم؟',
       'team.ctaBtn': 'تواصل معنا',
+      'rentals.eyebrow': 'متوفر أيضاً',
+      'rentals.title': 'تأجير الاستوديو.',
+      'rentals.body': 'تحتاج المساحة فقط دون الطاقم؟ استوديو الإنتاج والصوت المجهز بالكامل لدينا في الدوحة متاح للإيجار بالساعة أو باليوم — أحضر فريقك الخاص، أو اعمل بمفردك.',
+      'rentals.cta': 'استفسر عن التأجير',
       'work.eyebrow': 'أعمال مختارة',
       'work.title': 'لقطات من الميدان.',
       'work.sub': 'تغطيات وأعمال إنتاج حديثة — اضغط على أي مقطع لتشغيله.',
@@ -374,8 +386,10 @@ document.addEventListener('DOMContentLoaded', () => {
       'form.message': 'أخبرونا عن مشروعكم',
       'form.messagePh': 'الجدول الزمني، الميزانية التقريبية، وما تسعون لتحقيقه...',
       'form.messageErr': 'يرجى إضافة بعض التفاصيل (10 أحرف على الأقل).',
-      'form.submit': 'إرسال الطلب',
-      'form.note': 'يصل مباشرة إلى بريدنا، ويفتح واتساب برسالتكم جاهزة للإرسال — سريع ومباشر.',
+      'form.sendEmail': 'إرسال عبر البريد الإلكتروني',
+      'form.sendWhatsapp': 'إرسال عبر واتساب',
+      'form.opt7': 'تأجير الاستوديو',
+      'form.note': 'اختر الطريقة التي تفضلها للتواصل معنا — كلتاهما تصل مباشرة إلى الاستوديو.',
       'location.eyebrow': 'زوروا الاستوديو',
       'location.title': 'موقعنا في الدوحة.',
       'location.sub': 'العنوان، أوقات العمل، ورحلة إلينا — كل ذلك في مكان واحد.',
@@ -556,7 +570,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const CONTACT_EMAIL = 'taladigitalmedia@gmail.com';
   const form = document.getElementById('inquiryForm');
   const statusBox = document.getElementById('formStatus');
-  const submitBtn = document.getElementById('formSubmit');
+  const emailBtn = document.getElementById('sendEmailBtn');
+  const whatsappBtn = document.getElementById('sendWhatsappBtn');
 
   if (form) {
     const fields = {
@@ -612,78 +627,96 @@ document.addEventListener('DOMContentLoaded', () => {
       field.addEventListener('change', () => clearError(field));
     });
 
-    function buildWhatsAppUrl() {
-      const summary =
-`New inquiry via website:
-Name: ${fields.name.value.trim()}
+    function buildSummary() {
+      return `Name: ${fields.name.value.trim()}
 Email: ${fields.email.value.trim()}
 Phone: ${fields.phone.value.trim() || 'Not provided'}
 Service: ${fields.service.value}
 Message: ${fields.message.value.trim()}`;
+    }
+
+    function buildWhatsAppUrl() {
+      const summary = `New inquiry via website:\n${buildSummary()}`;
       return `https://wa.me/97433043148?text=${encodeURIComponent(summary)}`;
     }
 
     function mailtoFallback() {
       const subject = `New project inquiry — ${fields.service.value}`;
-      const body =
-`Name: ${fields.name.value.trim()}
-Email: ${fields.email.value.trim()}
-Phone: ${fields.phone.value.trim() || 'Not provided'}
-Service: ${fields.service.value}
-
-Message:
-${fields.message.value.trim()}`;
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildSummary())}`;
     }
 
-    function setSubmitting(isSubmitting) {
-      submitBtn.disabled = isSubmitting;
-      submitBtn.style.opacity = isSubmitting ? '.6' : '1';
-      submitBtn.style.cursor = isSubmitting ? 'wait' : 'pointer';
-      submitBtn.querySelector('.btn-label').textContent = isSubmitting ? 'Sending…' : 'Send inquiry';
-    }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      if (!validate()) {
-        statusBox.textContent = 'Please fix the highlighted fields.';
-        statusBox.className = 'form-status show err';
-        return;
+    function setButtonBusy(btn, isBusy, busyLabel, restingKey) {
+      btn.disabled = isBusy;
+      btn.style.opacity = isBusy ? '.6' : '1';
+      btn.style.cursor = isBusy ? 'wait' : 'pointer';
+      const label = btn.querySelector('.btn-label');
+      if (isBusy) {
+        label.textContent = busyLabel;
+      } else {
+        const dict = translations[currentLang] || translations.en;
+        label.textContent = dict[restingKey];
       }
+    }
 
-      // Open WhatsApp with the inquiry pre-filled, synchronously and before
-      // any await — browsers can block window.open() once the original
-      // click's "user activation" expires across an async gap, so this has
-      // to fire immediately inside the submit handler, not after the fetch.
-      window.open(buildWhatsAppUrl(), '_blank', 'noopener');
-
-      setSubmitting(true);
-      statusBox.className = 'form-status';
-
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' },
-        });
-
-        if (response.ok) {
-          statusBox.textContent = "Thanks — your message is on its way, and we've opened WhatsApp so you can send it there too.";
-          statusBox.className = 'form-status show ok';
-          form.reset();
-        } else {
-          throw new Error('Form endpoint returned an error');
+    // "Send via WhatsApp" — opens a prefilled chat; no email involved.
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener('click', () => {
+        if (!validate()) {
+          statusBox.textContent = 'Please fix the highlighted fields.';
+          statusBox.className = 'form-status show err';
+          return;
         }
-      } catch (err) {
-        // Network or endpoint failure — fall back to mailto so the
-        // client's message still reaches us either way.
-        mailtoFallback();
-        statusBox.textContent = "Couldn't send the email automatically, so we opened your email app — and WhatsApp is ready in the other tab.";
-        statusBox.className = 'form-status show err';
-      } finally {
-        setSubmitting(false);
-      }
+        // Open synchronously, inside the click handler — no await before
+        // this, so the browser's popup blocker sees a direct user gesture.
+        window.open(buildWhatsAppUrl(), '_blank', 'noopener');
+        statusBox.textContent = "WhatsApp is open in a new tab with your message ready — just hit send there.";
+        statusBox.className = 'form-status show ok';
+        form.reset();
+      });
+    }
+
+    // "Send via Email" — delivers straight to the studio inbox via FormSubmit.
+    if (emailBtn) {
+      emailBtn.addEventListener('click', async () => {
+        if (!validate()) {
+          statusBox.textContent = 'Please fix the highlighted fields.';
+          statusBox.className = 'form-status show err';
+          return;
+        }
+
+        setButtonBusy(emailBtn, true, 'Sending…', 'form.sendEmail');
+        statusBox.className = 'form-status';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' },
+          });
+
+          if (response.ok) {
+            statusBox.textContent = "Thanks — your message is on its way. We'll be in touch shortly.";
+            statusBox.className = 'form-status show ok';
+            form.reset();
+          } else {
+            throw new Error('Form endpoint returned an error');
+          }
+        } catch (err) {
+          // Network or endpoint failure — fall back to mailto so the
+          // client's message still reaches us either way.
+          mailtoFallback();
+          statusBox.textContent = "Couldn't send automatically, so we opened your email app instead.";
+          statusBox.className = 'form-status show err';
+        } finally {
+          setButtonBusy(emailBtn, false, '', 'form.sendEmail');
+        }
+      });
+    }
+
+    // Enter key inside a text field defaults to the email path.
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (emailBtn) emailBtn.click();
     });
   }
 

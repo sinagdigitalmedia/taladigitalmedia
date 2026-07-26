@@ -36,7 +36,7 @@
       <a href="#hours" data-close data-i18n="nav.hours">Hours</a>
       <a href="#contact" data-close data-i18n="nav.contact">Contact</a>
       <a href="#location" data-close data-i18n="nav.location">Location</a>
-      <a href="mailto:taladigitalmedia@gmail.com" class="btn nav-cta" data-close data-i18n="nav.email">Email us</a>
+      <a href="#contact" class="btn nav-cta" data-close data-i18n="nav.email">Email us</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Language">
       <button type="button" class="lang-btn active" id="langEn" data-lang="en">EN</button>
@@ -73,11 +73,13 @@
     <div class="frame"><span class="num">03</span> <span data-i18n="film.03">Media Production</span></div>
     <div class="frame"><span class="num">04</span> <span data-i18n="film.04">Brand Storytelling</span></div>
     <div class="frame"><span class="num">05</span> <span data-i18n="film.05">Creative Direction</span></div>
+    <div class="frame"><span class="num">06</span> <span data-i18n="film.06">Studio Rentals</span></div>
     <div class="frame"><span class="num">01</span> <span data-i18n="film.01">Digital Content</span></div>
     <div class="frame"><span class="num">02</span> <span data-i18n="film.02">Events Coverage</span></div>
     <div class="frame"><span class="num">03</span> <span data-i18n="film.03">Media Production</span></div>
     <div class="frame"><span class="num">04</span> <span data-i18n="film.04">Brand Storytelling</span></div>
     <div class="frame"><span class="num">05</span> <span data-i18n="film.05">Creative Direction</span></div>
+    <div class="frame"><span class="num">06</span> <span data-i18n="film.06">Studio Rentals</span></div>
   </div>
 </div>
 
@@ -164,6 +166,17 @@
   <p class="journey-closing reveal" data-i18n="journey.closing">As the industry continues to evolve, TALA Digital Media remains committed to innovation, technical excellence, and creative collaboration. Our journey is defined by our dedication to delivering seamless execution, building lasting partnerships, and transforming ideas into meaningful and impactful experiences for our clients and the wider community.</p>
 </section>
 
+<section class="rentals" id="rentals">
+  <div class="rentals-inner reveal" data-tilt data-tilt-max="2">
+    <div class="rentals-text">
+      <div class="eyebrow" data-i18n="rentals.eyebrow">Also available</div>
+      <h2 data-i18n="rentals.title">Studio rentals.</h2>
+      <p data-i18n="rentals.body">Need the space, not the crew? Our fully equipped production and audio studio in Doha is available to rent by the hour or by the day — bring your own team, or work solo.</p>
+    </div>
+    <a href="#contact" class="btn" data-i18n="rentals.cta">Enquire about rentals</a>
+  </div>
+</section>
+
 <section class="work" id="work">
   <div class="work-head reveal">
     <div class="eyebrow" data-i18n="work.eyebrow">Selected work</div>
@@ -237,7 +250,7 @@
     <div class="contact-info">
       <div class="info-item">
         <div class="label" data-i18n="contact.emailLabel">Email us</div>
-        <a class="mail" href="mailto:taladigitalmedia@gmail.com">taladigitalmedia@gmail.com</a>
+        <a class="mail" href="#inquiryForm">taladigitalmedia@gmail.com</a>
       </div>
 
       <div class="info-item">
@@ -305,6 +318,7 @@
               <option value="Media Production" data-i18n="form.opt3">Media Production</option>
               <option value="Brand Storytelling" data-i18n="form.opt4">Brand Storytelling</option>
               <option value="Creative Direction" data-i18n="form.opt5">Creative Direction</option>
+              <option value="Studio Rental" data-i18n="form.opt7">Studio Rental</option>
               <option value="Something else" data-i18n="form.opt6">Something else</option>
             </select>
             <span class="err-msg" data-i18n="form.serviceErr">Select what you need.</span>
@@ -318,10 +332,15 @@
         </div>
 
         <div class="form-foot">
-          <button type="submit" class="btn" id="formSubmit">
-            <span class="btn-label" data-i18n="form.submit">Send inquiry</span>
-          </button>
-          <p class="form-note" data-i18n="form.note">Sends straight to our inbox — no email app needed on your end.</p>
+          <div class="send-options">
+            <button type="button" class="btn" id="sendEmailBtn">
+              <span class="btn-label" data-i18n="form.sendEmail">Send via Email</span>
+            </button>
+            <button type="button" class="btn ghost" id="sendWhatsappBtn">
+              <span class="btn-label" data-i18n="form.sendWhatsapp">Send via WhatsApp</span>
+            </button>
+          </div>
+          <p class="form-note" data-i18n="form.note">Choose how you'd like to reach us — both go straight to the studio.</p>
         </div>
         <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
       </form>
