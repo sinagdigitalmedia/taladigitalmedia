@@ -144,37 +144,33 @@ header, footer, floating Uber/BadrGo/WhatsApp buttons, and language
 switcher as index.html (all driven by the same script.js and styles.css),
 so it feels like part of the same site rather than a separate build.
 
-Seven real people are featured:
-  - Mon Sarmiento — Founder & Creative Director (photo)
+Six real people are featured, each with a photo, name, and role:
+  - Mon Sarmiento — Founder & Creative Director
   - Drew Dhiren Nolasco — Head of Creatives, Multimedia & Director of
-    Photography (DOP) (photo)
-  - Ryan Benedick Yamar — Head of Audio Engineering (photo)
-  - Anjo Canicosa — Stage Manager (photo)
-  - Angel Flores — Content Creation & Assistant Director of Photography
-    (Assistant DOP). No photo was provided for Angel yet, so this card
-    shows a monogram avatar ("AF" on a gradient circle, matching the
-    site's palette) instead of a photo — same visual treatment used for
-    the founder pillars elsewhere on the site, so it still looks
-    intentional and professional rather than like a placeholder. Swap in
-    a real photo any time: replace the `<div class="team-avatar">AF</div>`
-    block in team.html with `<img src="assets/team/angel-flores.jpg"
-    class="team-photo">` once you have one, and drop the photo into
-    assets/team/.
-  - Juliana Sofia Angeline Usac Flores — Social Media Manager (photo)
+    Photography (DOP)
+  - Ryan Benedick Yamar — Head of Audio Engineering
+  - Anjo Canicosa — Stage Manager & Assistant Director of Photography
+    (Assistant DOP)
+  - Juliana Sofia Angeline Usac Flores — Social Media Manager & Content
+    Creation
   - Jonalyn F. Barte — Events Coordinator & Administrative Secretary
-    (photo)
 
 Photos are cropped/resized copies in assets/team/. To add or swap someone:
 duplicate one .team-card block in team.html, point the <img> at a new file
 in assets/team/, and update the name/role. Role text is translatable via
 the `team.*` keys in script.js; names are treated as proper nouns and left
-untranslated (same pattern as the founder's).
+untranslated (same pattern as the founder's). A `.team-avatar` monogram
+style (gradient circle with initials, no photo needed) is still defined in
+styles.css if a future team member joins before their photo is ready —
+just swap the <img class="team-photo"> for a
+<div class="team-avatar">XX</div> the same way the placeholder card
+worked earlier.
 
 OUR JOURNEY
 -----------
 The #journey section (on index.html, between About and Work) carries the
 "our journey" company story you provided — founding vision, then the two
-divisions (Sinag Productions and Yamar Muzik Studio) as side-by-side
+divisions (Sinag Events and Yamar Muzik Studio) as side-by-side
 cards, then the closing statement. All of it is translatable via the
 `journey.*` keys in script.js.
 
@@ -184,10 +180,16 @@ The open/closed status lives in two places, both driven by the same
 `schedule` array near the top of the language-switcher block in script.js:
 
   1. A compact blinking pill in the HEADER (every page, desktop and
-     mobile) — just the dot and "Open now" / "Closed now".
+     mobile, including team.html) — just the dot and "Open now" /
+     "Closed now".
   2. The full schedule + status card inside the LOCATION section
      (#location, which also holds the address, map, and ride buttons —
      click "Hours" in the nav and it scrolls straight to that block).
+
+(Fixed: the header pill previously only updated on pages that also had
+the full schedule card — like index.html — so it silently never updated
+on team.html. renderHours() in script.js now updates the header pill
+first, independent of whether the full card exists on that page.)
 
 Current hours:
   Sunday–Thursday & Saturday:  2:00 PM – 10:00 PM
@@ -213,21 +215,21 @@ studio hours in the Location section. Both use the official brand logos
 you provided (assets/uber-icon.png and assets/badrgo-icon.png).
 
 - UBER opens the Uber app (or uber.com on desktop) with the dropoff set
-  to exact coordinates (25.2862122, 51.5359695 — pulled from your Google
-  Maps pin) plus a nickname label "TALA Digital Media Advertising &
-  Events". The link only passes latitude/longitude now — an earlier
-  version also passed a formatted_address alongside the coordinates,
-  which made some versions of the Uber app treat the destination as a
-  text search (showing an editable field + a suggestion to tap) instead
-  of dropping straight onto the pin. Coordinates-only is the more direct
-  method. Be aware, though: Uber's public web/app link format does not
-  offer a way to guarantee a fully "zero-tap" destination on every device
-  and app version — that level of control only exists through Uber's
-  Business API, which needs a paid partner account and backend, not
-  something a static website can do on its own. What's here is the most
-  direct experience the public link format supports. All three Uber links
-  (floating buttons on both pages + the inline Location button) point to
-  the same coordinates — update the `dropoff[latitude]` /
+  to the full address you provided — "TALA Digital Media Advertising &
+  Events, Building No 30, Office Building, 5th Floor, Street No 138,
+  Zone 6, Doha, Qatar" — plus the exact coordinates (25.2862122,
+  51.5359695, pulled from your Google Maps pin) backing it up. Passing
+  both together means the trip request shows your full business name and
+  address as the destination label, while the coordinates keep the actual
+  pin accurate. Be aware, though: Uber's public web/app link format does
+  not offer a way to guarantee a fully "zero-tap" destination on every
+  device and app version — that level of control only exists through
+  Uber's Business API, which needs a paid partner account and backend,
+  not something a static website can do on its own. What's here is the
+  most direct experience the public link format supports. All three Uber
+  links (floating buttons on both pages + the inline Location button)
+  point to the same address/coordinates — update the
+  `dropoff[formatted_address]`, `dropoff[latitude]`, and
   `dropoff[longitude]` values in all three spots if the studio ever moves.
 - BADRGO opens the app via its official smart link (onelink.to/badrgo) —
   installs it if it's not already on the client's phone, opens it directly
@@ -253,17 +255,32 @@ BEFORE YOU GO LIVE — QUICK CHECKLIST
 [ ] Confirm the WhatsApp number (+974 3304 3148) and email address are
     correct throughout.
 [ ] Double-check the Google Maps pin under #location opens the right spot.
-[ ] Test all three Uber buttons open directly on the pin without extra
-    typing required (should land on a confirm screen, not a search box).
-[ ] Send over a real photo for Angel Flores when you have one — currently
-    showing an "AF" monogram avatar on the Team page (see TEAM PAGE above
-    for exactly where to swap it in).
+[ ] Test all three Uber buttons open with the full address and land
+    close to the pin.
 [ ] Give the Our Journey copy a read-through — it's your text as provided,
     just confirm it reads the way you want before it's public.
 [ ] Confirm the studio hours in script.js match what you actually want live.
 [ ] Click "Team" in the nav from both index.html and team.html to make
     sure the two pages link to each other correctly once deployed.
+[ ] Confirm the header Open/Closed pill now shows correctly on team.html
+    too (previously it silently stayed blank there — now fixed).
 [ ] Test the EN / AR language toggle and the mobile menu on an actual phone.
+
+DESIGN NOTES
+------------
+- Reel play buttons: no longer a text/emoji character — it's a pure CSS
+  triangle, and the native browser play icon that some browsers (notably
+  Safari/iOS) draw over a paused video is now explicitly hidden, so only
+  the one clean custom button shows.
+- Hero starfield: a very subtle twinkling star layer sits behind the hero
+  text (.hero::before / .hero::after in styles.css) — small dots at low
+  opacity that fade in and out on two staggered timers so it doesn't feel
+  mechanical. It's decorative only (pointer-events: none) and turns off
+  automatically for visitors with "reduce motion" enabled. To adjust it,
+  look for the "subtle twinkling starfield" comment in styles.css — the
+  dot positions are just percentage coordinates in the radial-gradient
+  list, and opacity/animation-duration control how bright and how fast
+  it twinkles.
 
 BROWSER SUPPORT
 ----------------

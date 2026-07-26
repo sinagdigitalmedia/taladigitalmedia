@@ -135,6 +135,41 @@ nav.links a:not(.btn):hover::after{width:100%;}
     var(--charcoal);
   overflow:hidden;
 }
+/* subtle twinkling starfield — two staggered layers of tiny dots for an
+   organic, non-repetitive blink rather than everything pulsing in sync */
+.hero::before,
+.hero::after{
+  content:"";
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    radial-gradient(1px 1px at 8% 22%, rgba(243,237,225,.9), transparent 60%),
+    radial-gradient(1px 1px at 18% 68%, rgba(243,237,225,.65), transparent 60%),
+    radial-gradient(1.4px 1.4px at 27% 12%, rgba(201,166,104,.85), transparent 60%),
+    radial-gradient(1px 1px at 38% 78%, rgba(243,237,225,.55), transparent 60%),
+    radial-gradient(1.2px 1.2px at 49% 33%, rgba(243,237,225,.8), transparent 60%),
+    radial-gradient(1px 1px at 58% 58%, rgba(201,166,104,.6), transparent 60%),
+    radial-gradient(1px 1px at 67% 20%, rgba(243,237,225,.5), transparent 60%),
+    radial-gradient(1.3px 1.3px at 76% 72%, rgba(243,237,225,.7), transparent 60%),
+    radial-gradient(1px 1px at 85% 40%, rgba(243,237,225,.6), transparent 60%),
+    radial-gradient(1px 1px at 93% 85%, rgba(201,166,104,.55), transparent 60%),
+    radial-gradient(1.2px 1.2px at 12% 90%, rgba(243,237,225,.5), transparent 60%),
+    radial-gradient(1px 1px at 62% 6%, rgba(243,237,225,.65), transparent 60%);
+  opacity:.5;
+  animation:star-twinkle 7s ease-in-out infinite;
+}
+.hero::after{
+  background-position:45px 60px;
+  opacity:.3;
+  animation-duration:9.5s;
+  animation-delay:2.4s;
+}
+@keyframes star-twinkle{
+  0%, 100%{opacity:.2;}
+  50%{opacity:.6;}
+}
+@media (prefers-reduced-motion: reduce){
+  .hero::before, .hero::after{animation:none; opacity:.35;}
+}
 .hero-watermark{
   position:absolute; right:clamp(-60px,-2vw,20px); top:50%;
   transform:translateY(-50%);

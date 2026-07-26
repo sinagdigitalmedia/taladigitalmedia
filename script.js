@@ -51,11 +51,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusDetail = document.getElementById('statusDetail');
     const headerDot = document.getElementById('headerStatusDot');
     const headerText = document.getElementById('headerStatusText');
-    if (!hoursList || !statusDot || !statusText || !statusDetail) return;
 
     const now = getQatarNow();
     const today = schedule[now.day];
     const isOpen = !!today && now.minutes >= today.open && now.minutes < today.close;
+
+    // The compact header pill lives on every page (including team.html),
+    // so it has to update independently of whether the full hours card
+    // below exists on this page — update it first, unconditionally.
+    if (headerDot && headerText) {
+      headerDot.classList.toggle('is-open', isOpen);
+      headerDot.classList.toggle('is-closed', !isOpen);
+      headerText.textContent = isOpen ? dict['hours.openNow'] : dict['hours.closedNow'];
+    }
+
+    // The full schedule list + status card only exist on index.html's
+    // Location section — bail out here if this page doesn't have them.
+    if (!hoursList || !statusDot || !statusText || !statusDetail) return;
 
     // build the schedule list
     hoursList.innerHTML = '';
@@ -73,16 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
       hoursList.appendChild(row);
     }
 
-    // status dot + headline
+    // status dot + headline (full card)
     statusDot.classList.toggle('is-open', isOpen);
     statusDot.classList.toggle('is-closed', !isOpen);
     statusText.textContent = isOpen ? dict['hours.openNow'] : dict['hours.closedNow'];
-
-    if (headerDot && headerText) {
-      headerDot.classList.toggle('is-open', isOpen);
-      headerDot.classList.toggle('is-closed', !isOpen);
-      headerText.textContent = isOpen ? dict['hours.openNow'] : dict['hours.closedNow'];
-    }
 
     // status detail
     if (isOpen) {
@@ -158,8 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'journey.eyebrow': 'Our journey',
       'journey.title': 'From one vision to two specialized divisions.',
       'journey.intro': 'TALA Digital Media was established with a clear vision — to create a unified creative platform that delivers innovative, high-quality, and purpose-driven media solutions in Doha, Qatar. What began as a passion for storytelling, production, music, and visual arts has grown into a dynamic creative hub that brings together specialized divisions dedicated to different fields of the industry.',
-      'journey.sinagName': 'Sinag Productions',
-      'journey.sinagBody': 'Through Sinag Productions, we advanced into professional photo, video, and multimedia content creation.',
+      'journey.sinagName': 'Sinag Events',
+      'journey.sinagBody': 'Through Sinag Events, we advanced into professional photo, video, and multimedia content creation.',
       'journey.yamarName': 'Yamar Muzik Studio',
       'journey.yamarBody': 'With Yamar Muzik Studio, we expanded into music production and audio engineering, providing artists and events with refined and powerful sound.',
       'journey.closing': 'As the industry continues to evolve, TALA Digital Media remains committed to innovation, technical excellence, and creative collaboration. Our journey is defined by our dedication to delivering seamless execution, building lasting partnerships, and transforming ideas into meaningful and impactful experiences for our clients and the wider community.',
@@ -169,9 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'team.founderRole': 'Founder & Creative Director',
       'team.role1Title': 'Head of Creatives, Multimedia & Director of Photography (DOP)',
       'team.role2Title': 'Head of Audio Engineering',
-      'team.role3Title': 'Stage Manager',
-      'team.role6Title': 'Content Creation & Assistant Director of Photography (Assistant DOP)',
-      'team.role4Title': 'Social Media Manager',
+      'team.role3Title': 'Stage Manager & Assistant Director of Photography (Assistant DOP)',
+      'team.role4Title': 'Social Media Manager & Content Creation',
       'team.role5Title': 'Events Coordinator & Administrative Secretary',
       'team.ctaText': 'Want to work with us on your next project?',
       'team.ctaBtn': 'Get in touch',
@@ -296,8 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'journey.eyebrow': 'رحلتنا',
       'journey.title': 'من رؤية واحدة إلى قسمين متخصصين.',
       'journey.intro': 'تأسست تالا للإعلام الرقمي برؤية واضحة — إنشاء منصة إبداعية موحّدة تقدّم حلولاً إعلامية مبتكرة وعالية الجودة وهادفة في الدوحة، قطر. وما بدأ كشغف بسرد القصص والإنتاج والموسيقى والفنون البصرية، تطوّر إلى مركز إبداعي ديناميكي يجمع أقساماً متخصصة مكرّسة لمجالات مختلفة من الصناعة.',
-      'journey.sinagName': 'سيناغ للإنتاج',
-      'journey.sinagBody': 'من خلال سيناغ للإنتاج، تقدّمنا في إنتاج المحتوى الفوتوغرافي والفيديو والوسائط المتعددة الاحترافي.',
+      'journey.sinagName': 'سيناغ للفعاليات',
+      'journey.sinagBody': 'من خلال سيناغ للفعاليات، تقدّمنا في إنتاج المحتوى الفوتوغرافي والفيديو والوسائط المتعددة الاحترافي.',
       'journey.yamarName': 'استوديو يامار ميوزيك',
       'journey.yamarBody': 'مع استوديو يامار ميوزيك، توسّعنا في إنتاج الموسيقى وهندسة الصوت، لنوفر للفنانين والفعاليات صوتاً نقياً وقوياً.',
       'journey.closing': 'مع استمرار تطوّر الصناعة، تبقى تالا للإعلام الرقمي ملتزمة بالابتكار والتميّز التقني والتعاون الإبداعي. تتحدد رحلتنا بالتزامنا بتنفيذ سلس، وبناء شراكات دائمة، وتحويل الأفكار إلى تجارب هادفة ومؤثرة لعملائنا والمجتمع الأوسع.',
@@ -307,9 +312,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'team.founderRole': 'المؤسس والمدير الإبداعي',
       'team.role1Title': 'رئيس الإبداع والوسائط المتعددة ومدير التصوير (DOP)',
       'team.role2Title': 'رئيس هندسة الصوت',
-      'team.role3Title': 'مدير المسرح',
-      'team.role6Title': 'إنتاج المحتوى ومساعد مدير التصوير (Assistant DOP)',
-      'team.role4Title': 'مدير التواصل الاجتماعي',
+      'team.role3Title': 'مدير المسرح ومساعد مدير التصوير (Assistant DOP)',
+      'team.role4Title': 'مدير التواصل الاجتماعي وإنتاج المحتوى',
       'team.role5Title': 'منسقة الفعاليات والسكرتيرة الإدارية',
       'team.ctaText': 'هل تريد العمل معنا في مشروعك القادم؟',
       'team.ctaBtn': 'تواصل معنا',
