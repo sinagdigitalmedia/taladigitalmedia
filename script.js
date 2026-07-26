@@ -7,6 +7,108 @@ document.addEventListener('DOMContentLoaded', () => {
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- studio hours: schedule + live open/closed status ---------- */
+  // 0=Sun 1=Mon 2=Tue 3=Wed 4=Thu 5=Fri 6=Sat — times in minutes since midnight, Doha time.
+  const schedule = [
+    { open: 14 * 60, close: 22 * 60 }, // Sun
+    { open: 14 * 60, close: 22 * 60 }, // Mon
+    { open: 14 * 60, close: 22 * 60 }, // Tue
+    { open: 14 * 60, close: 22 * 60 }, // Wed
+    { open: 14 * 60, close: 22 * 60 }, // Thu
+    null,                              // Fri — closed
+    { open: 14 * 60, close: 22 * 60 }, // Sat
+  ];
+
+  function getQatarNow() {
+    const fmt = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Qatar', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false,
+    });
+    const map = {};
+    fmt.formatToParts(new Date()).forEach(p => { map[p.type] = p.value; });
+    const weekdayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+    let hour = parseInt(map.hour, 10);
+    if (hour === 24) hour = 0;
+    return { day: weekdayMap[map.weekday], minutes: hour * 60 + parseInt(map.minute, 10) };
+  }
+
+  function formatTime(mins) {
+    let h = Math.floor(mins / 60);
+    const m = mins % 60;
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12; if (h === 0) h = 12;
+    return `${h}:${m.toString().padStart(2, '0')} ${ampm}`;
+  }
+
+  function tpl(str, values) {
+    return str.replace(/\{(\w+)\}/g, (_, k) => values[k] !== undefined ? values[k] : '');
+  }
+
+  function renderHours(lang) {
+    const dict = translations[lang] || translations.en;
+    const hoursList = document.getElementById('hoursList');
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const statusDetail = document.getElementById('statusDetail');
+    const headerDot = document.getElementById('headerStatusDot');
+    const headerText = document.getElementById('headerStatusText');
+    if (!hoursList || !statusDot || !statusText || !statusDetail) return;
+
+    const now = getQatarNow();
+    const today = schedule[now.day];
+    const isOpen = !!today && now.minutes >= today.open && now.minutes < today.close;
+
+    // build the schedule list
+    hoursList.innerHTML = '';
+    for (let d = 0; d < 7; d++) {
+      const row = document.createElement('div');
+      row.className = 'hours-row' + (d === now.day ? ' is-today' : '') + (!schedule[d] ? ' is-closed' : '');
+      const dayName = document.createElement('span');
+      dayName.className = 'day';
+      dayName.textContent = dict[`day.${d}`];
+      const time = document.createElement('span');
+      time.className = 'time';
+      time.textContent = schedule[d] ? `${formatTime(schedule[d].open)} – ${formatTime(schedule[d].close)}` : dict['hours.closedLabel'];
+      row.appendChild(dayName);
+      row.appendChild(time);
+      hoursList.appendChild(row);
+    }
+
+    // status dot + headline
+    statusDot.classList.toggle('is-open', isOpen);
+    statusDot.classList.toggle('is-closed', !isOpen);
+    statusText.textContent = isOpen ? dict['hours.openNow'] : dict['hours.closedNow'];
+
+    if (headerDot && headerText) {
+      headerDot.classList.toggle('is-open', isOpen);
+      headerDot.classList.toggle('is-closed', !isOpen);
+      headerText.textContent = isOpen ? dict['hours.openNow'] : dict['hours.closedNow'];
+    }
+
+    // status detail
+    if (isOpen) {
+      statusDetail.textContent = tpl(dict['hours.closesToday'], { time: formatTime(today.close) });
+    } else {
+      // find the next open slot, scanning up to 7 days ahead
+      for (let i = 0; i <= 7; i++) {
+        const d = (now.day + i) % 7;
+        const slot = schedule[d];
+        if (!slot) continue;
+        if (i === 0 && now.minutes >= slot.close) continue; // today already closed for the day
+        if (i === 0 && now.minutes < slot.open) {
+          statusDetail.textContent = tpl(dict['hours.opensToday'], { time: formatTime(slot.open) });
+        } else if (i === 1) {
+          statusDetail.textContent = tpl(dict['hours.opensTomorrow'], { time: formatTime(slot.open) });
+        } else {
+          statusDetail.textContent = tpl(dict['hours.opensOn'], { day: dict[`day.${d}`], time: formatTime(slot.open) });
+        }
+        break;
+      }
+    }
+  }
+
+  let currentLang = 'en';
+  let hoursTimer = null;
+
   /* ---------- language switcher (English / Arabic) ---------- */
   const translations = {
     en: {
@@ -16,10 +118,12 @@ document.addEventListener('DOMContentLoaded', () => {
       'nav.work': 'Work',
       'nav.contact': 'Contact',
       'nav.location': 'Location',
+      'nav.team': 'Team',
+      'nav.hours': 'Hours',
       'nav.email': 'Email us',
       'hero.eyebrow': 'Doha, Qatar — Est. Creative Media House',
       'hero.title': 'Stories, <em>framed</em><br>with purpose.',
-      'hero.sub': 'TALA Digital Media Advertising &amp; Events is a creative media and production company based in Doha. We handle digital content, events coverage, and full media production — every project shaped around your vision, start to final cut.',
+      'hero.sub': 'TALA Digital Media Advertising & Events is a creative media and production company based in Doha. We handle digital content, events coverage, and full media production — every project shaped around your vision, start to final cut.',
       'hero.ctaPrimary': 'Start a project',
       'hero.ctaSecondary': 'See our work',
       'hero.scroll': 'Scroll',
@@ -42,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'mv.visionBody': 'Our vision is to become a leading creative digital media hub in Qatar and beyond — recognized for excellence in production, innovation, and artistic collaboration, connecting people, elevating brands, and inspiring communities.',
       'about.storyMark': 'Our story.',
       'about.title': 'Built in Doha, made for every screen.',
-      'about.founderRole': 'Founder, TALA Digital Media Advertising &amp; Events',
-      'about.p1': "TALA Digital Media Advertising &amp; Events is a Doha, Qatar–based creative media company founded by Mon Sarmiento. We specialize in providing professional digital media solutions, from strategic planning and creative design to full project execution, tailored to meet each client's unique requirements.",
+      'about.founderRole': 'Founder, TALA Digital Media Advertising & Events',
+      'about.p1': "TALA Digital Media Advertising & Events is a Doha, Qatar–based creative media company founded by Mon Sarmiento. We specialize in providing professional digital media solutions, from strategic planning and creative design to full project execution, tailored to meet each client's unique requirements.",
       'about.p2': 'Driven by innovation, technical expertise, and a commitment to excellence, our team delivers high-quality and impactful content that strengthens brand identity and elevates events and organizations. We aim to build lasting partnerships by offering reliable, efficient, and results-oriented media services.',
       'about.pillar1Title': 'Planning',
       'about.pillar1Body': 'Strategy and creative direction shaped around your goals before a single frame is shot.',
@@ -51,6 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
       'about.pillar2Body': 'Full-scale execution — content, coverage, and media crafted with technical precision.',
       'about.pillar3Title': 'Partnership',
       'about.pillar3Body': 'Reliable, results-oriented collaboration built to outlast a single project.',
+      'team.eyebrow': 'The people behind it',
+      'team.title': 'Behind TALA Digital Media Advertising & Events.',
+      'team.sub': 'A small, senior team that plans, shoots, and delivers every project in-house.',
+      'team.founderRole': 'Founder & Creative Director',
+      'team.role1Title': 'Creative Direction',
+      'team.role1Body': 'Concept, storyboarding, and the creative thread that ties every shoot together.',
+      'team.role2Title': 'Production & Videography',
+      'team.role2Body': 'Multi-camera coverage, lighting, and on-site direction from call time to wrap.',
+      'team.role3Title': 'Photography & Content',
+      'team.role3Body': 'Stills, social content, and same-day edits built for fast-moving events.',
+      'team.role4Title': 'Events Coordination',
+      'team.role4Body': 'Logistics, scheduling, and the client-facing point of contact on every project.',
       'work.eyebrow': 'Selected work',
       'work.title': 'A few frames from the field.',
       'work.sub': 'Recent coverage and production work — tap any reel to play.',
@@ -62,6 +178,23 @@ document.addEventListener('DOMContentLoaded', () => {
       'work.card3Body': 'Multi-camera coverage of a live collaborative session.',
       'work.card4Title': 'Sinag Fashion Camp — Year 2',
       'work.card4Body': 'Full event recap: styling, runway, and behind-the-scenes.',
+      'hours.eyebrow': 'Studio hours',
+      'hours.title': "When we're around.",
+      'hours.sub': 'Doha time — reach out or plan your visit around these hours.',
+      'hours.openNow': 'Open now',
+      'hours.closedNow': 'Closed now',
+      'hours.closesToday': 'Closes today at {time}',
+      'hours.opensToday': 'Opens today at {time}',
+      'hours.opensTomorrow': 'Opens tomorrow at {time}',
+      'hours.opensOn': 'Opens {day} at {time}',
+      'hours.closedLabel': 'Closed',
+      'day.0': 'Sunday',
+      'day.1': 'Monday',
+      'day.2': 'Tuesday',
+      'day.3': 'Wednesday',
+      'day.4': 'Thursday',
+      'day.5': 'Friday',
+      'day.6': 'Saturday',
       'contact.title': "Let's make something worth remembering.",
       'contact.sub': "Tell us what you're planning and the team behind every TALA frame will follow up shortly.",
       'contact.emailLabel': 'Email us',
@@ -93,12 +226,20 @@ document.addEventListener('DOMContentLoaded', () => {
       'form.messageErr': 'Give us a few details (10+ characters).',
       'form.submit': 'Send inquiry',
       'form.note': 'Sends straight to our inbox — no email app needed on your end.',
-      'map.title': 'TALA Digital Media Advertising &amp; Events',
+      'location.eyebrow': 'Visit the studio',
+      'location.title': 'Find us in Doha.',
+      'location.sub': 'Address, studio hours, and a ride there — all in one place.',
+      'map.addressLabel': 'Address',
+      'map.title': 'TALA Digital Media Advertising & Events',
       'map.caption': 'Building No 30, Office Building, 5th Floor, Street No 138, Zone 6 — Doha, Qatar.',
       'map.open': 'Open in Google Maps ↗',
-      'map.badge': 'TALA Digital Media Advertising &amp; Events',
-      'footer.brand': 'TALA Digital Media Advertising &amp; Events',
-      'footer.tagline': 'Doha, Qatar — Creative Media &amp; Production',
+      'map.badge': 'TALA Digital Media Advertising & Events',
+      'ride.uberName': 'Book with Uber',
+      'ride.uberSub': 'Destination pre-filled',
+      'ride.badrgoName': 'Book with BadrGo',
+      'ride.badrgoSub': 'Opens the app',
+      'footer.brand': 'TALA Digital Media Advertising & Events',
+      'footer.tagline': 'Doha, Qatar — Creative Media & Production',
     },
     ar: {
       'brand.full': 'تالا لإدارة الإعلام الرقمي<br>والدعاية والفعاليات',
@@ -107,6 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'nav.work': 'أعمالنا',
       'nav.contact': 'تواصل معنا',
       'nav.location': 'الموقع',
+      'nav.team': 'الفريق',
+      'nav.hours': 'أوقات العمل',
       'nav.email': 'راسلنا',
       'hero.eyebrow': 'الدوحة، قطر — بيت إبداعي للإعلام الرقمي',
       'hero.title': 'قصص، <em>موثّقة</em><br>بغاية.',
@@ -142,6 +285,18 @@ document.addEventListener('DOMContentLoaded', () => {
       'about.pillar2Body': 'تنفيذ متكامل — محتوى وتغطية وإعلام بدقة تقنية عالية.',
       'about.pillar3Title': 'الشراكة',
       'about.pillar3Body': 'تعاون موثوق وقائم على النتائج يدوم لما بعد المشروع الواحد.',
+      'team.eyebrow': 'الفريق وراء العمل',
+      'team.title': 'خلف تالا للإعلام الرقمي والدعاية والفعاليات.',
+      'team.sub': 'فريق صغير ومتمرّس يخطط وينفّذ ويسلّم كل مشروع داخلياً.',
+      'team.founderRole': 'المؤسس والمدير الإبداعي',
+      'team.role1Title': 'الإخراج الإبداعي',
+      'team.role1Body': 'الفكرة، اللوحة القصصية، والخيط الإبداعي الذي يربط كل تصوير.',
+      'team.role2Title': 'الإنتاج والتصوير المرئي',
+      'team.role2Body': 'تغطية متعددة الكاميرات، الإضاءة، والإخراج الميداني من البداية حتى الختام.',
+      'team.role3Title': 'التصوير الفوتوغرافي والمحتوى',
+      'team.role3Body': 'صور ثابتة، محتوى للتواصل الاجتماعي، ومونتاج سريع للفعاليات.',
+      'team.role4Title': 'تنسيق الفعاليات',
+      'team.role4Body': 'اللوجستيات، الجدولة، ونقطة التواصل مع العميل في كل مشروع.',
       'work.eyebrow': 'أعمال مختارة',
       'work.title': 'لقطات من الميدان.',
       'work.sub': 'تغطيات وأعمال إنتاج حديثة — اضغط على أي مقطع لتشغيله.',
@@ -153,6 +308,23 @@ document.addEventListener('DOMContentLoaded', () => {
       'work.card3Body': 'تغطية متعددة الكاميرات لجلسة تعاونية حية.',
       'work.card4Title': 'معسكر سيناغ للأزياء — السنة الثانية',
       'work.card4Body': 'ملخص كامل للفعالية: التنسيق، عرض الأزياء، وخلف الكواليس.',
+      'hours.eyebrow': 'أوقات العمل',
+      'hours.title': 'أوقات تواجدنا.',
+      'hours.sub': 'بتوقيت الدوحة — تواصلوا معنا أو خططوا لزيارتكم ضمن هذه الأوقات.',
+      'hours.openNow': 'مفتوح الآن',
+      'hours.closedNow': 'مغلق الآن',
+      'hours.closesToday': 'يُغلق اليوم الساعة {time}',
+      'hours.opensToday': 'يفتح اليوم الساعة {time}',
+      'hours.opensTomorrow': 'يفتح غداً الساعة {time}',
+      'hours.opensOn': 'يفتح يوم {day} الساعة {time}',
+      'hours.closedLabel': 'مغلق',
+      'day.0': 'الأحد',
+      'day.1': 'الاثنين',
+      'day.2': 'الثلاثاء',
+      'day.3': 'الأربعاء',
+      'day.4': 'الخميس',
+      'day.5': 'الجمعة',
+      'day.6': 'السبت',
       'contact.title': 'لنصنع شيئاً يستحق أن يُتذكّر.',
       'contact.sub': 'أخبرونا بما تخططون له، وسيتواصل معكم فريق تالا قريباً.',
       'contact.emailLabel': 'راسلنا',
@@ -184,10 +356,18 @@ document.addEventListener('DOMContentLoaded', () => {
       'form.messageErr': 'يرجى إضافة بعض التفاصيل (10 أحرف على الأقل).',
       'form.submit': 'إرسال الطلب',
       'form.note': 'يصل مباشرة إلى بريدنا — لا حاجة لفتح تطبيق البريد لديكم.',
+      'location.eyebrow': 'زوروا الاستوديو',
+      'location.title': 'موقعنا في الدوحة.',
+      'location.sub': 'العنوان، أوقات العمل، ورحلة إلينا — كل ذلك في مكان واحد.',
+      'map.addressLabel': 'العنوان',
       'map.title': 'تالا للإعلام الرقمي والدعاية والفعاليات',
       'map.caption': 'مبنى رقم 30، الطابق الخامس، شارع رقم 138، المنطقة 6 — الدوحة، قطر.',
       'map.open': 'افتح في خرائط جوجل ↗',
       'map.badge': 'تالا للإعلام الرقمي والدعاية والفعاليات',
+      'ride.uberName': 'احجز عبر أوبر',
+      'ride.uberSub': 'الوجهة معبأة مسبقاً',
+      'ride.badrgoName': 'احجز عبر بدرگو',
+      'ride.badrgoSub': 'يفتح التطبيق',
       'footer.brand': 'تالا للإعلام الرقمي والدعاية والفعاليات',
       'footer.tagline': 'الدوحة، قطر — إعلام وإنتاج إبداعي',
     },
@@ -222,6 +402,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try { localStorage.setItem('tala-lang', lang); } catch (e) { /* ignore */ }
+
+    currentLang = isAr ? 'ar' : 'en';
+    renderHours(currentLang);
   }
 
   const langEnBtn = document.getElementById('langEn');
@@ -234,6 +417,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let savedLang = 'en';
   try { savedLang = localStorage.getItem('tala-lang') || 'en'; } catch (e) { /* ignore */ }
   applyLanguage(savedLang);
+
+  // keep the open/closed status accurate while the page stays open
+  hoursTimer = setInterval(() => renderHours(currentLang), 60000);
 
   /* ---------- header scroll state ---------- */
   const header = document.getElementById('siteHeader');
@@ -313,26 +499,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    /* hero watermark + medallion parallax */
+    /* hero watermark parallax */
     const hero = document.querySelector('.hero');
     const watermark = document.querySelector('.hero-watermark');
-    const medallion = document.querySelector('.medallion');
-    if (hero && (watermark || medallion)) {
+    if (hero && watermark) {
       hero.addEventListener('mousemove', (e) => {
         const rect = hero.getBoundingClientRect();
         const px = (e.clientX - rect.left) / rect.width - 0.5;
         const py = (e.clientY - rect.top) / rect.height - 0.5;
-        if (watermark) {
-          watermark.style.transform =
-            `translate(${(px * -18).toFixed(1)}px, calc(-50% + ${(py * -18).toFixed(1)}px)) rotate(${(px * 3).toFixed(1)}deg)`;
-        }
-        if (medallion) {
-          medallion.style.transform = `translate(${(px * 14).toFixed(1)}px, ${(py * 14).toFixed(1)}px)`;
-        }
+        watermark.style.transform =
+          `translate(${(px * -18).toFixed(1)}px, calc(-50% + ${(py * -18).toFixed(1)}px)) rotate(${(px * 3).toFixed(1)}deg)`;
       });
       hero.addEventListener('mouseleave', () => {
-        if (watermark) watermark.style.transform = 'translateY(-50%)';
-        if (medallion) medallion.style.transform = 'translate(0, 0)';
+        watermark.style.transform = 'translateY(-50%)';
       });
     }
   }

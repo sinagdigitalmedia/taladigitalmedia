@@ -17,15 +17,23 @@
 <div class="spotlight" id="spotlight"></div>
 
 <header id="siteHeader">
-  <a href="#top" class="logo">
-    <img src="assets/tala-logo.png" alt="TALA Digital Media Advertising & Events" class="logo-mark">
-    <span class="full" data-i18n="brand.full">TALA Digital Media<br>Advertising &amp; Events</span>
-  </a>
+  <div class="header-left">
+    <a href="#top" class="logo">
+      <img src="assets/tala-logo.png" alt="TALA Digital Media Advertising & Events" class="logo-mark">
+      <span class="full" data-i18n-html="brand.full">TALA Digital Media<br>Advertising &amp; Events</span>
+    </a>
+    <a href="#hours" class="header-status" id="headerStatus" aria-label="Studio open/closed status">
+      <span class="status-dot" id="headerStatusDot"></span>
+      <span id="headerStatusText">—</span>
+    </a>
+  </div>
   <div class="nav-wrap">
     <nav class="links" id="navLinks">
       <a href="#mission" data-close data-i18n="nav.mission">Mission</a>
       <a href="#about" data-close data-i18n="nav.about">About</a>
+      <a href="#team" data-close data-i18n="nav.team">Team</a>
       <a href="#work" data-close data-i18n="nav.work">Work</a>
+      <a href="#hours" data-close data-i18n="nav.hours">Hours</a>
       <a href="#contact" data-close data-i18n="nav.contact">Contact</a>
       <a href="#location" data-close data-i18n="nav.location">Location</a>
       <a href="mailto:taladigitalmedia@gmail.com" class="btn nav-cta" data-close data-i18n="nav.email">Email us</a>
@@ -40,17 +48,6 @@
 
 <section class="hero" id="top">
   <img src="assets/tala-logo.png" alt="" class="hero-watermark" aria-hidden="true">
-
-  <div class="medallion" aria-hidden="true">
-    <div class="medallion-inner">
-      <div class="medallion-face front">
-        <img src="assets/tala-logo.png" alt="">
-      </div>
-      <div class="medallion-face back">
-        <span>EST.<br>DOHA<br>QATAR</span>
-      </div>
-    </div>
-  </div>
 
   <div class="hero-eyebrow eyebrow" data-i18n="hero.eyebrow">Doha, Qatar — Est. Creative Media House</div>
   <h1 class="hero-title" data-i18n-html="hero.title">Stories, <em>framed</em><br>with purpose.</h1>
@@ -144,6 +141,56 @@
   </div>
 </section>
 
+<section class="team" id="team">
+  <div class="team-head reveal">
+    <div class="eyebrow" data-i18n="team.eyebrow">The people behind it</div>
+    <h2 class="team-title" data-i18n="team.title">Behind TALA Digital Media Advertising &amp; Events.</h2>
+    <p class="team-sub" data-i18n="team.sub">A small, senior team that plans, shoots, and delivers every project in-house.</p>
+  </div>
+
+  <div class="team-grid reveal">
+    <article class="team-card team-card--founder" data-tilt data-tilt-max="4">
+      <img src="assets/mon-sarmiento.webp" alt="Mon Sarmiento, Founder of TALA Digital Media Advertising & Events" class="team-photo">
+      <div class="team-meta">
+        <h3>Mon Sarmiento</h3>
+        <span class="team-role" data-i18n="team.founderRole">Founder &amp; Creative Director</span>
+      </div>
+    </article>
+
+    <article class="team-card" data-tilt data-tilt-max="4">
+      <div class="team-avatar" aria-hidden="true">CD</div>
+      <div class="team-meta">
+        <h3 data-i18n="team.role1Title">Creative Direction</h3>
+        <p data-i18n="team.role1Body">Concept, storyboarding, and the creative thread that ties every shoot together.</p>
+      </div>
+    </article>
+
+    <article class="team-card" data-tilt data-tilt-max="4">
+      <div class="team-avatar" aria-hidden="true">PR</div>
+      <div class="team-meta">
+        <h3 data-i18n="team.role2Title">Production &amp; Videography</h3>
+        <p data-i18n="team.role2Body">Multi-camera coverage, lighting, and on-site direction from call time to wrap.</p>
+      </div>
+    </article>
+
+    <article class="team-card" data-tilt data-tilt-max="4">
+      <div class="team-avatar" aria-hidden="true">PH</div>
+      <div class="team-meta">
+        <h3 data-i18n="team.role3Title">Photography &amp; Content</h3>
+        <p data-i18n="team.role3Body">Stills, social content, and same-day edits built for fast-moving events.</p>
+      </div>
+    </article>
+
+    <article class="team-card" data-tilt data-tilt-max="4">
+      <div class="team-avatar" aria-hidden="true">EC</div>
+      <div class="team-meta">
+        <h3 data-i18n="team.role4Title">Events Coordination</h3>
+        <p data-i18n="team.role4Body">Logistics, scheduling, and the client-facing point of contact on every project.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
 <section class="work" id="work">
   <div class="work-head reveal">
     <div class="eyebrow" data-i18n="work.eyebrow">Selected work</div>
@@ -152,7 +199,7 @@
   </div>
 
   <div class="work-grid reveal">
-    <article class="work-card" data-tilt data-tilt-max="5">
+    <article class="work-card">
       <div class="work-video">
         <video preload="none" poster="assets/posters/acrylic-workshop.jpg" playsinline controls>
           <source src="assets/videos/acrylic-workshop.mp4" type="video/mp4">
@@ -165,7 +212,7 @@
       </div>
     </article>
 
-    <article class="work-card" data-tilt data-tilt-max="5">
+    <article class="work-card">
       <div class="work-video">
         <video preload="none" poster="assets/posters/articulation-workshop.jpg" playsinline controls>
           <source src="assets/videos/articulation-workshop.mp4" type="video/mp4">
@@ -178,7 +225,7 @@
       </div>
     </article>
 
-    <article class="work-card" data-tilt data-tilt-max="5">
+    <article class="work-card">
       <div class="work-video">
         <video preload="none" poster="assets/posters/building-a-band-workshop.jpg" playsinline controls>
           <source src="assets/videos/building-a-band-workshop.mp4" type="video/mp4">
@@ -191,7 +238,7 @@
       </div>
     </article>
 
-    <article class="work-card" data-tilt data-tilt-max="5">
+    <article class="work-card">
       <div class="work-video">
         <video preload="none" poster="assets/posters/sinag-fashion-camp.jpg" playsinline controls>
           <source src="assets/videos/sinag-fashion-camp.mp4" type="video/mp4">
@@ -311,22 +358,63 @@
 </section>
 
 <section class="location" id="location">
-  <div class="map-panel reveal">
-    <div class="map-caption">
-      <div>
-        <h3 data-i18n="map.title">TALA Digital Media Advertising &amp; Events</h3>
+  <div class="location-head reveal">
+    <div class="eyebrow" data-i18n="location.eyebrow">Visit the studio</div>
+    <h2 class="location-title" data-i18n="location.title">Find us in Doha.</h2>
+    <p class="location-sub" data-i18n="location.sub">Address, studio hours, and a ride there — all in one place.</p>
+  </div>
+
+  <div class="location-grid">
+    <div class="location-info reveal" id="hours">
+      <div class="info-item">
+        <div class="label" data-i18n="map.addressLabel">Address</div>
         <p data-i18n="map.caption">Building No 30, Office Building, 5th Floor, Street No 138, Zone 6 — Doha, Qatar.</p>
+        <a href="https://maps.app.goo.gl/rVitD5RRP86TxVhg9" target="_blank" rel="noopener" class="map-open" data-i18n="map.open">Open in Google Maps ↗</a>
       </div>
-      <a href="https://maps.app.goo.gl/rVitD5RRP86TxVhg9" target="_blank" rel="noopener" class="map-open" data-i18n="map.open">Open in Google Maps ↗</a>
+
+      <div class="status-card" id="statusCard">
+        <span class="status-dot" id="statusDot"></span>
+        <div>
+          <div class="status-text" id="statusText">—</div>
+          <div class="status-detail" id="statusDetail">—</div>
+        </div>
+      </div>
+
+      <div class="hours-list" id="hoursList"></div>
+
+      <div class="ride-row">
+        <a class="ride-btn ride-uber" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bformatted_address%5D=Building%20No%2030%2C%20Street%20138%2C%20Zone%206%2C%20Doha%2C%20Qatar&dropoff%5Bnickname%5D=TALA%20Digital%20Media%20Advertising%20%26%20Events" target="_blank" rel="noopener">
+          <span class="ride-logo ride-logo--uber" aria-hidden="true">Uber</span>
+          <span class="ride-text">
+            <span class="ride-name" data-i18n="ride.uberName">Book with Uber</span>
+            <span class="ride-sub" data-i18n="ride.uberSub">Destination pre-filled</span>
+          </span>
+        </a>
+        <a class="ride-btn ride-badrgo" href="https://onelink.to/badrgo" target="_blank" rel="noopener">
+          <img src="assets/badrgo-icon.png" alt="" class="ride-logo-img">
+          <span class="ride-text">
+            <span class="ride-name" data-i18n="ride.badrgoName">Book with BadrGo</span>
+            <span class="ride-sub" data-i18n="ride.badrgoSub">Opens the app</span>
+          </span>
+        </a>
+      </div>
     </div>
-    <div class="map-frame">
-      <div class="map-badge"><span class="ping"></span><span data-i18n="map.badge">TALA Digital Media Advertising &amp; Events</span></div>
-      <iframe
-        src="https://www.google.com/maps?q=TALA+Digital+Media+Advertising+%26+Events,+Building+No+30,+Street+138,+Zone+6,+Doha,+Qatar&output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen
-        title="TALA Digital Media Advertising & Events location"></iframe>
+
+    <div class="map-panel reveal">
+      <div class="map-caption">
+        <div>
+          <h3 data-i18n="map.title">TALA Digital Media Advertising &amp; Events</h3>
+        </div>
+      </div>
+      <div class="map-frame">
+        <div class="map-badge"><span class="ping"></span><span data-i18n="map.badge">TALA Digital Media Advertising &amp; Events</span></div>
+        <iframe
+          src="https://www.google.com/maps?q=TALA+Digital+Media+Advertising+%26+Events,+Building+No+30,+Street+138,+Zone+6,+Doha,+Qatar&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+          title="TALA Digital Media Advertising & Events location"></iframe>
+      </div>
     </div>
   </div>
 </section>
@@ -337,15 +425,36 @@
   <a href="#top" class="to-top" aria-label="Back to top">↑</a>
 </footer>
 
-<a
-  href="https://wa.me/97433043148?text=Hi%20TALA%20Digital%20Media%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
-  target="_blank"
-  rel="noopener"
-  class="wa-float"
-  aria-label="Chat with TALA Digital Media on WhatsApp">
-  <span class="wa-ring"></span>
-  <img src="assets/whatsapp-icon.png" alt="">
-</a>
+<div class="float-stack">
+  <a
+    href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bformatted_address%5D=Building%20No%2030%2C%20Street%20138%2C%20Zone%206%2C%20Doha%2C%20Qatar&dropoff%5Bnickname%5D=TALA%20Digital%20Media%20Advertising%20%26%20Events"
+    target="_blank"
+    rel="noopener"
+    class="float-btn float-uber"
+    aria-label="Book a ride to TALA Digital Media on Uber"
+    title="Book a ride on Uber">
+    <span class="float-label">U</span>
+  </a>
+  <a
+    href="https://onelink.to/badrgo"
+    target="_blank"
+    rel="noopener"
+    class="float-btn float-badrgo"
+    aria-label="Book a ride to TALA Digital Media on BadrGo"
+    title="Book a ride on BadrGo">
+    <img src="assets/badrgo-icon.png" alt="">
+  </a>
+  <a
+    href="https://wa.me/97433043148?text=Hi%20TALA%20Digital%20Media%2C%20I%27d%20like%20to%20know%20more%20about%20your%20services."
+    target="_blank"
+    rel="noopener"
+    class="float-btn float-wa"
+    aria-label="Chat with TALA Digital Media on WhatsApp"
+    title="Chat on WhatsApp">
+    <span class="wa-ring"></span>
+    <img src="assets/whatsapp-icon.png" alt="">
+  </a>
+</div>
 
 <script src="script.js"></script>
 </body>
