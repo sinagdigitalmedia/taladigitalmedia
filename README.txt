@@ -16,7 +16,7 @@ assets/
   badrgo-icon.png     BadrGo brand icon (floating button + ride booking)
   instagram-icon.png  Instagram brand icon (available if you want to swap
                        it in for the current inline SVG version)
-  sinag-workshops-poster-v2.jpg  Workshops poster shown in the
+  sinag-workshops-poster-v3.jpg  Workshops poster shown in the
                        announcement popup (compressed copy of the poster
                        you provided)
   team/               Cropped photos for the six people on the Team page
@@ -330,7 +330,7 @@ SINAG EVENTS WORKSHOPS POPUP
 A temporary announcement modal appears on both pages (index.html and
 team.html) about 1.2 seconds after a first-time visitor loads the site.
 It shows your workshops poster image at the top
-(assets/sinag-workshops-poster-v2.jpg — a compressed copy of the poster
+(assets/sinag-workshops-poster-v3.jpg — a compressed copy of the poster
 you provided), followed by a text list of all eight workshop sessions
 (Charcoal and Acrylic are split into two rows since they run on different
 dates) with dates/times, a "Sign up via Google Form" button, and both
