@@ -317,8 +317,8 @@ BEFORE YOU GO LIVE — QUICK CHECKLIST
 [ ] Test the EN / AR language toggle and the mobile menu on an actual phone.
 [ ] Open the site in a fresh/incognito browser tab and confirm the
     workshops popup appears after ~1 second, shows the poster image
-    correctly, the Google Form link opens, and both WhatsApp numbers
-    (+974 6607 8911 and +974 3304 3148) open a chat correctly.
+    correctly, and both WhatsApp numbers (+974 6607 8911 and
+    +974 3304 3148) open a chat correctly.
 [ ] Close the popup, then click the gold "WORKSHOPS" tab on the left
     edge of the screen and confirm it reopens the popup.
 [ ] The Charcoal (Aug 1–8) and Acrylic (Aug 10–17) dates in the text list
@@ -333,9 +333,10 @@ It shows your workshops poster image at the top
 (assets/sinag-workshops-poster-v3.jpg — a compressed copy of the poster
 you provided), followed by a text list of all eight workshop sessions
 (Charcoal and Acrylic are split into two rows since they run on different
-dates) with dates/times, a "Sign up via Google Form" button, and both
-phone numbers as tappable WhatsApp links (+974 6607 8911 and
-+974 3304 3148). It only auto-opens once per browser session
+dates) with dates/times, and both phone numbers as prominent, button-
+styled WhatsApp links (+974 6607 8911 and +974 3304 3148) under
+"Message us to register" — registration is phone/WhatsApp-only now, no
+Google Form. It only auto-opens once per browser session
 (sessionStorage), and won't reappear on its own if the visitor closes it
 and keeps browsing, or comes back later in the same session.
 

@@ -1023,20 +1023,15 @@ html[dir="rtl"] .workshops-tab:hover{
 .popup-item-name{font-family:var(--display); font-weight:500; font-size:.96rem; color:var(--off-white);}
 .popup-item-when{font-family:var(--mono); font-size:.72rem; letter-spacing:.02em; color:var(--sand); white-space:nowrap;}
 
-.popup-cta{
-  margin-top:28px; display:flex; gap:14px; flex-wrap:wrap;
-}
-.popup-cta .btn{flex:1 1 200px; text-align:center; justify-content:center;}
-
 .popup-phones{
-  margin-top:20px; padding-top:18px; border-top:1px solid var(--line);
+  margin-top:28px; padding-top:24px; border-top:1px solid var(--line);
   text-align:center;
 }
 .popup-phones-label{
-  display:block; font-family:var(--mono); font-size:.68rem; text-transform:uppercase;
-  letter-spacing:.1em; color:rgba(243,237,225,0.5); margin-bottom:10px;
+  display:block; font-family:var(--mono); font-size:.72rem; text-transform:uppercase;
+  letter-spacing:.1em; color:var(--sand); margin-bottom:14px;
 }
-.popup-phones-list{display:flex; gap:20px; flex-wrap:wrap; justify-content:center;}
+.popup-phones-list{display:flex; gap:12px; flex-wrap:wrap; justify-content:center;}
 .popup-phones-list a{
   font-family:var(--display); font-weight:600; font-size:.95rem; color:var(--sand-light);
   border-bottom:1px solid var(--line); padding-bottom:2px;
@@ -1044,11 +1039,27 @@ html[dir="rtl"] .workshops-tab:hover{
 }
 .popup-phones-list a:hover{color:var(--sand); border-color:var(--sand);}
 
+.popup-phones--primary{border-top:none; margin-top:26px; padding-top:0;}
+.popup-phones--primary .popup-phones-label{font-size:.8rem; margin-bottom:16px;}
+.popup-phones--primary .popup-phones-list{gap:14px;}
+.popup-phones--primary .popup-phones-list a{
+  flex:1 1 180px; max-width:230px;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  padding:14px 20px; border:1px solid var(--sand); border-bottom:1px solid var(--sand);
+  border-radius:999px; background:transparent;
+  font-size:.9rem; letter-spacing:.02em;
+  transition:background .3s ease, color .3s ease, transform .3s ease;
+}
+.popup-phones--primary .popup-phones-list a:hover{
+  background:var(--sand); color:var(--charcoal); transform:translateY(-2px);
+}
+
 @media(max-width:600px){
   .popup-card{max-height:92vh;}
   .popup-body{padding:24px 20px;}
   .popup-item-when{white-space:normal;}
-  .popup-cta{flex-direction:column;}
+  .popup-phones--primary .popup-phones-list{flex-direction:column; align-items:stretch;}
+  .popup-phones--primary .popup-phones-list a{max-width:none;}
   .popup-phones-list{gap:16px;}
 }
 
